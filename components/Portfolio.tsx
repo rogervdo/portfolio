@@ -11,7 +11,7 @@ const SECTION_IDS = ["about", "experience", "projects", "leadership"] as const;
 
 /** Brittany-style list row hover: panel fill, dim siblings, inset hairline (projects + leadership + experience). */
 const LIST_ITEM_HOVER_PANEL =
-  "group relative lg:-mx-6 lg:rounded-md lg:border lg:border-transparent lg:bg-transparent lg:p-6 lg:transition-colors lg:hover:border-transparent lg:hover:bg-panel lg:group-hover/list:opacity-60 lg:hover:shadow-[inset_0_1px_0_0_var(--color-divider-inset)] lg:hover:!opacity-100";
+  "group relative lg:-mx-6 lg:rounded-sm lg:border lg:border-transparent lg:bg-transparent lg:p-6 lg:transition-colors lg:hover:border-transparent lg:hover:bg-panel lg:group-hover/list:opacity-60 lg:hover:shadow-[inset_0_1px_0_0_var(--color-divider-inset)] lg:hover:!opacity-100";
 
 const SOCIAL = [
   { kind: "github" as const, label: "GitHub", href: "https://github.com/rogervdo" },
@@ -43,6 +43,7 @@ const PROJECTS = [
   {
     title: "Nori — AI requirements assistant (NortDev)",
     body: "Banorte-aligned web stack for structured requirements: conversational IA, RAG over organizational knowledge, and exportable corporate docs.",
+    image: "/images/NORI.jpeg",
     links: [
       { label: "Backend (API)", href: "https://github.com/nortdevv/nori-api" },
       { label: "Frontend", href: "https://github.com/nortdevv/nori" },
@@ -51,6 +52,7 @@ const PROJECTS = [
   {
     title: "Machtia — soft skills for the coffee sector",
     body: "RAG with semantic and hybrid search, embeddings, and an AI chat assistant wired to Apple Intelligence tooling. FastAPI backend, Streamlit admin, SwiftUI iOS client, PostgreSQL with pgvector.",
+    image: "/images/MACHTIA.png",
     links: [
       { label: "iOS app", href: "https://github.com/Bryan-Meza/Coffee-Overflow-MachtiaApp" },
       { label: "Desktop (Streamlit)", href: "https://github.com/rogervdo/MachtiaStreamlit" },
@@ -59,6 +61,7 @@ const PROJECTS = [
   {
     title: "OXXO training platform",
     body: "Advisor training stack: ASP.NET Core REST APIs and Razor Pages with Unity WebGL scenarios. Modular C# services for session lifecycle, check-in/out, auth, and decision tracking for large concurrent cohorts.",
+    image: "/images/OXXO.png",
     links: [
       { label: "Unity", href: "https://github.com/rogervdo/oxxo-unity" },
       { label: "Web", href: "https://github.com/rogervdo/oxxo-web" },
@@ -67,6 +70,7 @@ const PROJECTS = [
   {
     title: "YouTube Stamina Focus",
     body: "Chromium (Manifest V3) extension for softer daily limits on YouTube: caps, optional countdowns, comment gating, quality nudges, and thumbnail downgrades—everything stays on-device.",
+    image: "/images/STAMINA.png",
     links: [{ label: "Repository", href: "https://github.com/rogervdo/Stamina" }],
   },
 ] as const;
@@ -75,25 +79,31 @@ const LEADERSHIP: readonly {
   title: string;
   body: string;
   href?: string;
-  imageSlug: string;
+  /** Local `/images/...` path, or omit to use a compact placeholder. */
+  imageSrc?: string;
+  /** Label used only for the placeholder when `imageSrc` is absent. */
+  placeholderLabel: string;
 }[] = [
   {
     title: "Focus Coding Group — co-founder",
     body:
       'Co-founded Focus Coding Group with the objective of improving how we practice and level up as engineers. Members have landed roles at Oracle, Pinterest, C3.ai, Accenture, and Softtek.',
-    imageSlug: "L1-focus",
+    imageSrc: "/images/CODEORDIE.png",
+    placeholderLabel: "L1-focus",
   },
   {
     title: "HackMTY 2025 — Capital One track (Cappie)",
     body: "Hackathon delivery for the Capital One fintech challenge: AI-forward banking UX with personalized coaching—FastAPI backend, MySQL, and Gemini for categorization and savings recommendations.",
     href: "https://github.com/rogervdo/Hackmty2025-CapitalOne",
-    imageSlug: "L2-hackmty",
+    imageSrc: "/images/CAPITAL.jpeg",
+    placeholderLabel: "L2-hackmty",
   },
   {
     title: "Code or Die — LeetCode companion extension",
     body: "Open-source Chrome extension (forked from LeetNet) for friend activity feeds, difficulty leaderboards, daily rankings, and a strikes system—with aggressive client-side caching to limit API chatter.",
     href: "https://github.com/rogervdo/Code-or-Die",
-    imageSlug: "L3-code-or-die",
+    imageSrc: "/images/CODEORDIE_EXT.png",
+    placeholderLabel: "L3-code-or-die",
   },
 ];
 
@@ -398,30 +408,30 @@ export default function Portfolio() {
             <section id="projects" className="scroll-mt-24 lg:pb-16">
               <h2 className="mb-8 text-xs font-semibold uppercase tracking-widest text-bright">Featured projects</h2>
               <ul className="group/list space-y-10">
-                {PROJECTS.map((p, index) => {
+                {PROJECTS.map((p) => {
                   const primary = p.links[0]?.href ?? "#projects";
                   return (
                     <li key={p.title}>
                       <article>
                         <div className={LIST_ITEM_HOVER_PANEL}>
-                          <div className="relative z-10 grid gap-8 sm:grid-cols-8 sm:items-start sm:gap-x-8 sm:gap-y-0 lg:gap-x-10">
+                          <div className="relative z-10 grid gap-4 sm:grid-cols-8 sm:items-start sm:gap-x-4 sm:gap-y-0 lg:gap-x-6">
                             <div className="sm:col-span-2 sm:row-start-1">
                               <Image
-                                className="aspect-video w-full shrink-0 rounded-lg border border-borderSubtle bg-media object-cover transition-colors sm:aspect-[4/3] sm:max-w-[150px]"
-                                src={`https://placehold.co/800x600/122131/75879b/png?font=mono&text=P${index + 1}`}
-                                width={300}
+                                className="aspect-video w-full shrink-0 rounded border-2 border-borderSubtle bg-media object-cover opacity-95 transition-colors sm:max-w-[200px] sm:translate-y-px"
+                                src={p.image}
+                                width={400}
                                 height={225}
                                 alt=""
-                                sizes="(min-width: 640px) 150px, 100vw"
+                                sizes="(min-width: 640px) 200px, 100vw"
                               />
                             </div>
-                            <div className="mt-6 sm:col-span-6 sm:mt-0 sm:flex sm:flex-col sm:justify-center">
+                            <div className="mt-4 sm:col-span-6 sm:mt-0 sm:flex sm:flex-col sm:justify-center">
                               <h3 className="text-xl font-semibold tracking-tight text-bright">
                                 <a
                                   href={primary}
                                   target="_blank"
                                   rel="noreferrer noopener"
-                                  className="group/card mb-3 inline-flex items-center gap-x-2 text-sm font-semibold leading-snug tracking-tight text-bright transition-colors hover:text-accent hover:underline hover:underline-offset-4 hover:transition-none sm:mb-2 sm:text-base xl:text-lg"
+                                  className="group/card mb-2 inline-flex items-center gap-x-2 text-sm font-semibold leading-snug tracking-tight text-bright transition-colors hover:text-accent hover:underline hover:underline-offset-4 hover:transition-none sm:mb-1 sm:text-base xl:text-lg"
                                 >
                                   {p.title}
                                   <ArrowUpRightTiny className="-translate-y-px opacity-95" />
@@ -475,20 +485,23 @@ export default function Portfolio() {
                     <li key={item.title}>
                       <article>
                         <div className={LIST_ITEM_HOVER_PANEL}>
-                          <div className="outline-offset-8 transition-colors focus-within:z-40">
-                            <div className="relative z-10 grid gap-8 sm:grid-cols-8 sm:items-start sm:gap-x-8 sm:gap-y-px lg:gap-x-10">
+                            <div className="outline-offset-8 transition-colors focus-within:z-40">
+                            <div className="relative z-10 grid gap-4 sm:grid-cols-8 sm:items-start sm:gap-x-4 sm:gap-y-px lg:gap-x-6">
                               <div className="relative sm:col-span-2">
                                 <Image
                                   alt=""
-                                  className="aspect-[5/4] w-full rounded-lg border border-borderSubtle bg-media object-cover transition-colors sm:aspect-[4/3] sm:max-w-[150px]"
+                                  className="aspect-video w-full rounded border-2 border-borderSubtle bg-media object-cover opacity-95 transition-colors sm:max-w-[200px] sm:translate-y-px"
                                   height={225}
-                                  src={`https://placehold.co/800x560/172033/8492a9/png?font=mono&text=${encodeURIComponent(item.imageSlug)}`}
-                                  width={300}
-                                  sizes="(min-width: 640px) 150px, 100vw"
+                                  src={
+                                    item.imageSrc ??
+                                    `https://placehold.co/800x450/172033/8492a9/png?font=mono&text=${encodeURIComponent(item.placeholderLabel)}`
+                                  }
+                                  width={400}
+                                  sizes="(min-width: 640px) 200px, 100vw"
                                   loading={index === 0 ? "eager" : "lazy"}
                                 />
                               </div>
-                              <div className="sm:col-span-6 sm:flex sm:min-h-full sm:flex-col sm:justify-center">
+                              <div className="mt-4 sm:col-span-6 sm:mt-0 sm:flex sm:min-h-full sm:flex-col sm:justify-center">
                                 <h3 className="text-xl font-semibold tracking-tight text-bright">
                                   {item.href ? (
                                     <a
