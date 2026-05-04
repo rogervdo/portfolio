@@ -32,6 +32,7 @@ const config: Config = {
         },
         bright: "var(--color-text-bright)",
         inkSoft: "var(--color-text-soft)",
+        inkMuted: "var(--color-text-muted)",
         inkFaint: "var(--color-text-faint)",
         inkOnRow: "var(--color-text-on-row)",
       },

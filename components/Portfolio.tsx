@@ -231,13 +231,13 @@ export default function Portfolio() {
         <aside className="flex flex-col gap-24 pt-16 lg:sticky lg:top-0 lg:z-40 lg:min-h-[100dvh] lg:w-[48%] lg:max-w-md lg:justify-between lg:self-start lg:gap-12 lg:pt-24 lg:pb-12">
           <div>
             <header>
-              <h1 className="text-4xl font-bold tracking-tight text-slate-200 sm:text-5xl">
+              <h1 className="text-4xl font-bold tracking-tight text-bright sm:text-5xl">
                 <Link href="/">Rogelio Villarreal</Link>
               </h1>
-              <p className="mt-4 max-w-xs text-lg font-medium leading-normal text-slate-200 lg:text-xl">
+              <p className="mt-4 max-w-xs text-lg font-medium leading-normal text-bright lg:text-xl">
                 Junior Software Engineer · CS @ Tec de Monterrey
               </p>
-              <p className="mt-4 max-w-xs text-base leading-normal text-slate-500">
+              <p className="mt-4 max-w-xs text-base leading-normal text-inkFaint">
                 Full-stack delivery with pragmatic AI integrations—FastAPI and Python backends, careful data modeling,
                 and iOS when the problem calls for it.
               </p>
@@ -246,7 +246,7 @@ export default function Portfolio() {
             </header>
 
             <nav className="mt-10 lg:hidden" aria-label="Jump links">
-              <ul className="flex flex-wrap gap-x-6 gap-y-2 text-xs font-semibold uppercase tracking-widest text-slate-500">
+              <ul className="flex flex-wrap gap-x-6 gap-y-2 text-xs font-semibold uppercase tracking-widest text-inkFaint">
                 <li>
                   <a href="#about" className="hover:text-bright">
                     About
@@ -281,7 +281,7 @@ export default function Portfolio() {
                       ? {}
                       : { target: "_blank", rel: "noreferrer noopener" })}
                     aria-label={s.label}
-                    className="inline-flex items-center text-slate-300 transition-colors hover:text-accent focus-visible:text-accent"
+                    className="inline-flex items-center text-inkSoft transition-colors hover:text-accent focus-visible:text-accent"
                   >
                     {s.kind === "github" ? (
                       <GitHubIcon />
@@ -298,14 +298,14 @@ export default function Portfolio() {
         </aside>
 
         <main className="lg:flex lg:w-[52%] lg:flex-col lg:py-24">
-          <article className="pb-16 text-base leading-relaxed text-slate-400 lg:pb-12">
+          <article className="pb-16 text-base leading-relaxed text-inkMuted lg:pb-12">
             <section id="about" className="scroll-mt-16 lg:scroll-mt-24">
               <h2 className="sr-only">About</h2>
               <div className="flex flex-col gap-4 lg:gap-12">
                 <p>
-                  I&apos;m <span className="text-slate-300">Rogelio Jesús Villarreal De Ochoa</span>, pursuing a Bachelor
+                  I&apos;m <span className="text-inkSoft">Rogelio Jesús Villarreal De Ochoa</span>, pursuing a Bachelor
                   of Science in Computer Science and Technology at{" "}
-                  <span className="text-slate-300">Tecnológico de Monterrey</span> (August 2023 — June 2027) with a GPA of{" "}
+                  <span className="text-inkSoft">Tecnológico de Monterrey</span> (August 2023 — June 2027) with a GPA of{" "}
                   93.1/100 (3.73/4.0). My coursework spans OOP, data structures &amp; algorithms, database systems,
                   software construction, multi-agent systems &amp; computational graphics, and cybersecurity.
                 </p>
@@ -330,14 +330,14 @@ export default function Portfolio() {
               <div className="mb-12 flex justify-end">
                 <Link
                   href="/resume.pdf"
-                  className="group/link inline-flex items-baseline gap-x-1 text-[11px] font-semibold uppercase tracking-widest text-slate-200 transition-colors hover:text-accent focus-visible:text-accent sm:text-[12px]"
+                  className="group/link inline-flex items-baseline gap-x-1 text-[11px] font-semibold uppercase tracking-widest text-bright transition-colors hover:text-accent focus-visible:text-accent sm:text-[12px]"
                 >
-                  <span aria-hidden className="-translate-x-px text-slate-400">
+                  <span aria-hidden className="-translate-x-px text-inkMuted">
                     [
                   </span>
                   <span>Résumé</span>
                   <ArrowUpRightTiny className="translate-y-[0.2em]" />
-                  <span aria-hidden className="translate-x-px text-slate-400">
+                  <span aria-hidden className="translate-x-px text-inkMuted">
                     ]
                   </span>
                 </Link>
@@ -350,13 +350,13 @@ export default function Portfolio() {
                       <a href={job.href} className="group/link-card relative mb-px block pb-12 focus-visible:z-40 focus-visible:outline-none lg:pb-8">
                         <span aria-hidden className="absolute inset-0 rounded-lg lg:-inset-x-px" />
                         <div className="relative z-10 grid gap-y-px sm:auto-rows-min sm:grid-cols-8 sm:gap-x-8 lg:gap-x-10">
-                          <header className="z-10 text-[11px] font-semibold uppercase leading-normal tracking-normal text-slate-500 sm:col-span-2 sm:w-44 sm:tracking-wide lg:tracking-wider xl:w-52">
+                          <header className="z-10 text-[11px] font-semibold uppercase leading-normal tracking-normal text-inkFaint sm:col-span-2 sm:w-44 sm:tracking-wide lg:tracking-wider xl:w-52">
                             {job.range}
                           </header>
                           <div className="z-10 sm:col-span-6">
-                            <span className="block text-xl font-semibold tracking-tight text-slate-200">
-                              <span className="text-slate-200">{job.title}</span>
-                              <span className="text-slate-200"> · </span>
+                            <span className="block text-xl font-semibold tracking-tight text-bright">
+                              <span className="text-bright">{job.title}</span>
+                              <span className="text-bright"> · </span>
                               <span className="transition-colors hover:text-accent hover:underline hover:underline-offset-4 hover:transition-none focus-visible:text-accent">
                                 <span className="inline-flex items-center gap-x-2 whitespace-nowrap">
                                   <span>{job.company}</span>
@@ -364,7 +364,7 @@ export default function Portfolio() {
                                 </span>
                               </span>
                             </span>
-                            <div className="mt-4 space-y-3 text-sm leading-normal text-slate-400 lg:leading-relaxed">
+                            <div className="mt-4 space-y-3 text-sm leading-normal text-inkMuted lg:leading-relaxed">
                               {job.lines.map((line) => (
                                 <p key={line}>{line}</p>
                               ))}
@@ -389,14 +389,14 @@ export default function Portfolio() {
 
               <Link
                 href="/resume.pdf"
-                className="group/link mt-14 inline-flex items-center gap-x-2 text-[15px] font-semibold text-slate-200 transition-colors hover:text-accent focus-visible:text-accent sm:text-base"
+                className="group/link mt-14 inline-flex items-center gap-x-2 text-[15px] font-semibold text-bright transition-colors hover:text-accent focus-visible:text-accent sm:text-base"
               >
                 View full résumé <ArrowUpRightTiny className="translate-y-[0.11em]" />
               </Link>
             </section>
 
             <section id="projects" className="scroll-mt-24 lg:pb-16">
-              <h2 className="mb-8 text-xs font-semibold uppercase tracking-widest text-slate-200">Featured projects</h2>
+              <h2 className="mb-8 text-xs font-semibold uppercase tracking-widest text-bright">Featured projects</h2>
               <ul className="group/list space-y-10">
                 {PROJECTS.map((p, index) => {
                   const primary = p.links[0]?.href ?? "#projects";
@@ -416,12 +416,12 @@ export default function Portfolio() {
                               />
                             </div>
                             <div className="mt-6 sm:col-span-6 sm:mt-0 sm:flex sm:flex-col sm:justify-center">
-                              <h3 className="text-xl font-semibold tracking-tight text-slate-200">
+                              <h3 className="text-xl font-semibold tracking-tight text-bright">
                                 <a
                                   href={primary}
                                   target="_blank"
                                   rel="noreferrer noopener"
-                                  className="group/card mb-3 inline-flex items-center gap-x-2 text-sm font-semibold leading-snug tracking-tight text-slate-200 transition-colors hover:text-accent hover:underline hover:underline-offset-4 hover:transition-none sm:mb-2 sm:text-base xl:text-lg"
+                                  className="group/card mb-3 inline-flex items-center gap-x-2 text-sm font-semibold leading-snug tracking-tight text-bright transition-colors hover:text-accent hover:underline hover:underline-offset-4 hover:transition-none sm:mb-2 sm:text-base xl:text-lg"
                                 >
                                   {p.title}
                                   <ArrowUpRightTiny className="-translate-y-px opacity-95" />
@@ -454,18 +454,18 @@ export default function Portfolio() {
                 href="https://github.com/rogervdo?tab=repositories"
                 target="_blank"
                 rel="noreferrer noopener"
-                className="group/link mt-10 inline-flex items-center gap-x-2 text-[15px] font-semibold text-slate-200 transition-colors hover:text-accent focus-visible:text-accent sm:text-base"
+                className="group/link mt-10 inline-flex items-center gap-x-2 text-[15px] font-semibold text-bright transition-colors hover:text-accent focus-visible:text-accent sm:text-base"
               >
                 More repositories on GitHub <ArrowRightTiny />
               </a>
             </section>
 
             <section id="leadership" className="scroll-mt-24 lg:scroll-mt-24">
-              <h2 className="mb-8 text-xs font-semibold uppercase tracking-widest text-slate-200">Leadership activities</h2>
+              <h2 className="mb-8 text-xs font-semibold uppercase tracking-widest text-bright">Leadership activities</h2>
               <ul className="group/list space-y-10">
                 {LEADERSHIP.map((item, index) => {
                   const HeadingContent = (
-                    <span className="group/link inline-flex items-center gap-x-2 text-sm font-semibold leading-snug text-slate-200 transition-colors hover:text-accent hover:underline hover:underline-offset-4 hover:transition-none focus-visible:text-accent sm:text-[15px] lg:text-[15px]">
+                    <span className="group/link inline-flex items-center gap-x-2 text-sm font-semibold leading-snug text-bright transition-colors hover:text-accent hover:underline hover:underline-offset-4 hover:transition-none focus-visible:text-accent sm:text-[15px] lg:text-[15px]">
                       <span>{item.title}</span>
                       {item.href ? <ArrowUpRightTiny className="-translate-y-px shrink-0" /> : null}
                     </span>
@@ -489,7 +489,7 @@ export default function Portfolio() {
                                 />
                               </div>
                               <div className="sm:col-span-6 sm:flex sm:min-h-full sm:flex-col sm:justify-center">
-                                <h3 className="text-xl font-semibold tracking-tight text-slate-200">
+                                <h3 className="text-xl font-semibold tracking-tight text-bright">
                                   {item.href ? (
                                     <a
                                       href={item.href}
@@ -503,7 +503,7 @@ export default function Portfolio() {
                                     HeadingContent
                                   )}
                                 </h3>
-                                <p className="mt-2 max-w-prose text-sm leading-relaxed text-slate-400 lg:mt-3">{item.body}</p>
+                                <p className="mt-2 max-w-prose text-sm leading-relaxed text-inkMuted lg:mt-3">{item.body}</p>
                               </div>
                             </div>
                           </div>
@@ -516,9 +516,9 @@ export default function Portfolio() {
             </section>
           </article>
 
-          <p className="mt-8 max-w-md text-sm leading-normal text-slate-500 lg:sticky lg:top-28 lg:z-40 lg:mt-12 lg:self-start lg:leading-relaxed">
+          <p className="mt-8 max-w-md text-sm leading-normal text-inkFaint lg:sticky lg:top-28 lg:z-40 lg:mt-12 lg:self-start lg:leading-relaxed">
             Adapted layout inspired by{" "}
-            <a href="https://brittanychiang.com" className="font-medium text-slate-500 hover:text-accent">
+            <a href="https://brittanychiang.com" className="font-medium text-inkFaint hover:text-accent">
               brittanychiang.com
             </a>
             . Built with Next.js · TypeScript · Tailwind CSS.

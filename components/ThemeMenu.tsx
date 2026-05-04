@@ -7,8 +7,8 @@ import { THEMES, THEME_STORAGE_KEY, type ThemeId } from "@/lib/theme";
 function readTheme(): ThemeId {
   if (typeof document === "undefined") return "teal";
   const raw = document.documentElement.dataset.theme;
-  if (raw === "forest" || raw === "teal") return raw;
-  return "teal";
+  const ok = THEMES.some((t) => t.id === raw);
+  return ok ? (raw as ThemeId) : "teal";
 }
 
 function applyTheme(themeId: ThemeId) {

@@ -40,7 +40,7 @@ export function SideNav({ active, className }: SideNavProps) {
                     "text-xs font-bold uppercase tracking-widest transition-colors",
                     isActive
                       ? "text-bright"
-                      : "text-slate-500 group-hover:text-bright group-focus-visible:text-bright",
+                      : "text-inkFaint group-hover:text-bright group-focus-visible:text-bright",
                   )}
                 >
                   {item.label}

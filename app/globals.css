@@ -27,20 +27,23 @@
   --color-nav-line-active: rgb(226 232 240);
   --color-text-bright: rgb(226 232 240);
   --color-text-soft: rgb(203 213 225);
+  --color-text-muted: rgb(148 163 184);
   --color-text-faint: rgb(100 116 139);
   --color-text-on-row: rgb(241 245 249);
 }
 
 [data-theme="forest"] {
-  --color-page: #0a1610;
+  --color-page: #0f1c15;
   --color-accent: #bef264;
   --color-accent-muted: rgb(190 242 100 / 0.9);
   --color-chip-bg: rgb(163 230 53 / 0.12);
   --color-accent-ink: #142006;
-  --color-spotlight-rgb: 132, 204, 22;
+  /* Page-tilted vignette — not lime accent — softer than default flashlight */
+  --color-spotlight-rgb: 62, 80, 70;
+  --color-spotlight-alpha: 0.125;
   --color-focus-ring: rgb(190 242 100 / 0.55);
-  --color-panel: rgb(12 42 28 / 0.55);
-  --color-media: rgb(10 35 22 / 0.72);
+  --color-panel: rgb(14 46 34 / 0.54);
+  --color-media: rgb(12 40 29 / 0.71);
   --color-border-subtle: rgb(190 242 100 / 0.14);
   --color-divider-inset: rgb(132 204 22 / 0.2);
   --color-pop-bg: rgb(12 34 22 / 0.96);
@@ -55,8 +58,69 @@
   --color-nav-line-active: rgb(220 243 210);
   --color-text-bright: rgb(228 245 232);
   --color-text-soft: rgb(198 220 206);
+  --color-text-muted: rgb(166 182 173);
   --color-text-faint: rgb(118 145 128);
   --color-text-on-row: rgb(236 252 240);
+}
+
+[data-theme="catppuccin"] {
+  --color-page: #151527;
+  --color-accent: #f9e2af;
+  --color-accent-muted: rgb(249 226 175 / 0.92);
+  --color-chip-bg: rgb(249 226 175 / 0.12);
+  --color-accent-ink: #11111b;
+  --color-spotlight-rgb: 64, 66, 90;
+  --color-spotlight-alpha: 0.12;
+  --color-focus-ring: rgb(249 226 175 / 0.5);
+  --color-panel: rgb(22 22 36 / 0.6);
+  --color-media: rgb(26 26 42 / 0.76);
+  --color-border-subtle: rgb(249 226 175 / 0.1);
+  --color-divider-inset: rgb(166 173 200 / 0.14);
+  --color-pop-bg: rgb(24 24 37 / 0.97);
+  --color-pop-border: rgb(58 62 82 / 0.92);
+  --color-pop-fab-bg: rgb(24 24 37 / 0.94);
+  --color-pop-fab-border: rgb(58 62 82 / 0.88);
+  --color-pop-fab-hover-bg: rgb(49 50 68 / 0.98);
+  --color-pop-fab-hover-border: rgb(249 226 175 / 0.35);
+  --color-pop-row-selected: rgb(49 50 68 / 0.9);
+  --color-pop-row-hover: rgb(49 50 68 / 0.48);
+  --color-nav-line: rgb(69 71 90);
+  --color-nav-line-active: rgb(220 226 239);
+  --color-text-bright: rgb(220 226 239);
+  --color-text-soft: rgb(198 203 219);
+  --color-text-muted: rgb(140 143 157);
+  --color-text-faint: rgb(102 106 118);
+  --color-text-on-row: rgb(232 236 246);
+}
+
+[data-theme="brown"] {
+  --color-page: #1a1610;
+  --color-accent: #dcb86a;
+  --color-accent-muted: rgb(220 184 106 / 0.9);
+  --color-chip-bg: rgb(220 184 106 / 0.12);
+  --color-accent-ink: #1a130e;
+  --color-spotlight-rgb: 84, 72, 62;
+  --color-spotlight-alpha: 0.122;
+  --color-focus-ring: rgb(220 184 106 / 0.52);
+  --color-panel: rgb(40 31 26 / 0.56);
+  --color-media: rgb(35 27 21 / 0.73);
+  --color-border-subtle: rgb(220 184 106 / 0.11);
+  --color-divider-inset: rgb(180 145 98 / 0.22);
+  --color-pop-bg: rgb(32 24 19 / 0.97);
+  --color-pop-border: rgb(78 62 52 / 0.9);
+  --color-pop-fab-bg: rgb(36 27 21 / 0.94);
+  --color-pop-fab-border: rgb(78 62 52 / 0.86);
+  --color-pop-fab-hover-bg: rgb(48 36 29 / 0.98);
+  --color-pop-fab-hover-border: rgb(220 184 106 / 0.38);
+  --color-pop-row-selected: rgb(54 41 34 / 0.9);
+  --color-pop-row-hover: rgb(54 41 34 / 0.46);
+  --color-nav-line: rgb(92 74 62);
+  --color-nav-line-active: rgb(245 235 226);
+  --color-text-bright: rgb(245 235 226);
+  --color-text-soft: rgb(210 192 178);
+  --color-text-muted: rgb(176 156 139);
+  --color-text-faint: rgb(142 118 104);
+  --color-text-on-row: rgb(252 246 239);
 }
 
 html {
@@ -64,7 +128,7 @@ html {
 }
 
 body {
-  @apply bg-page font-sans text-slate-400 antialiased selection:bg-accent selection:text-accent-ink;
+  @apply bg-page font-sans text-inkMuted antialiased selection:bg-accent selection:text-accent-ink;
   font-feature-settings: var(--font-feature-inter);
 }
 

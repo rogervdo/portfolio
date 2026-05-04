@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import Script from "next/script";
-import { THEME_STORAGE_KEY } from "@/lib/theme";
+import { THEME_IDS, THEME_STORAGE_KEY } from "@/lib/theme";
 import "./globals.css";
 
 const inter = Inter({
@@ -24,9 +24,11 @@ export default function RootLayout({
     <html lang="en" className={`${inter.variable} scroll-smooth`} suppressHydrationWarning>
       <body className={`${inter.className} min-h-screen`}>
         <Script id="theme-init" strategy="beforeInteractive">
-          {`(function(){try{var t=localStorage.getItem(${JSON.stringify(
+          {`(function(){var v=${JSON.stringify(
+            THEME_IDS,
+          )};try{var t=localStorage.getItem(${JSON.stringify(
             THEME_STORAGE_KEY,
-          )});document.documentElement.dataset.theme=t==="forest"?"forest":"teal";}catch(e){document.documentElement.dataset.theme="teal";}})();`}
+          )});document.documentElement.dataset.theme=v.indexOf(t)>-1?t:"teal";}catch(e){document.documentElement.dataset.theme="teal";}})();`}
         </Script>
         {children}
       </body>
