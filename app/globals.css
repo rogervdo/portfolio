@@ -1,0 +1,26 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --font-feature-inter: "ss03", "cv02", "cv11";
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  @apply bg-slate-900 font-sans text-slate-400 antialiased selection:bg-teal-300 selection:text-teal-900;
+  font-feature-settings: var(--font-feature-inter);
+}
+
+@layer base {
+  a:hover {
+    @apply text-teal-300;
+  }
+
+  h1 a:hover {
+    @apply text-inherit;
+  }
+}
