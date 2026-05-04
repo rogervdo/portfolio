@@ -4,6 +4,59 @@
 
 :root {
   --font-feature-inter: "ss03", "cv02", "cv11";
+  --color-page: #0f172a;
+  --color-accent: #5eead4;
+  --color-accent-muted: rgb(94 234 212 / 0.9);
+  --color-chip-bg: rgb(45 212 191 / 0.1);
+  --color-accent-ink: #134e4a;
+  --color-spotlight-rgb: 29, 78, 216;
+  --color-focus-ring: rgb(45 212 191 / 0.7);
+  --color-panel: rgb(30 41 59 / 0.5);
+  --color-media: rgb(30 41 59 / 0.7);
+  --color-border-subtle: rgb(226 232 240 / 0.1);
+  --color-divider-inset: rgb(148 163 184 / 0.15);
+  --color-pop-bg: rgb(30 41 59 / 0.95);
+  --color-pop-border: rgb(71 85 105 / 0.8);
+  --color-pop-fab-bg: rgb(30 41 59 / 0.9);
+  --color-pop-fab-border: rgb(71 85 105 / 0.8);
+  --color-pop-fab-hover-bg: rgb(30 41 59 / 1);
+  --color-pop-fab-hover-border: rgb(100 116 139 / 1);
+  --color-pop-row-selected: rgb(51 65 85 / 0.8);
+  --color-pop-row-hover: rgb(51 65 85 / 0.5);
+  --color-nav-line: rgb(71 85 105);
+  --color-nav-line-active: rgb(226 232 240);
+  --color-text-bright: rgb(226 232 240);
+  --color-text-soft: rgb(203 213 225);
+  --color-text-faint: rgb(100 116 139);
+  --color-text-on-row: rgb(241 245 249);
+}
+
+[data-theme="forest"] {
+  --color-page: #0a1610;
+  --color-accent: #bef264;
+  --color-accent-muted: rgb(190 242 100 / 0.9);
+  --color-chip-bg: rgb(163 230 53 / 0.12);
+  --color-accent-ink: #142006;
+  --color-spotlight-rgb: 132, 204, 22;
+  --color-focus-ring: rgb(190 242 100 / 0.55);
+  --color-panel: rgb(12 42 28 / 0.55);
+  --color-media: rgb(10 35 22 / 0.72);
+  --color-border-subtle: rgb(190 242 100 / 0.14);
+  --color-divider-inset: rgb(132 204 22 / 0.2);
+  --color-pop-bg: rgb(12 34 22 / 0.96);
+  --color-pop-border: rgb(55 95 72 / 0.85);
+  --color-pop-fab-bg: rgb(14 40 26 / 0.92);
+  --color-pop-fab-border: rgb(55 95 72 / 0.85);
+  --color-pop-fab-hover-bg: rgb(16 48 30 / 0.96);
+  --color-pop-fab-hover-border: rgb(84 140 98 / 0.95);
+  --color-pop-row-selected: rgb(22 62 40 / 0.88);
+  --color-pop-row-hover: rgb(22 62 40 / 0.45);
+  --color-nav-line: rgb(55 95 72);
+  --color-nav-line-active: rgb(220 243 210);
+  --color-text-bright: rgb(228 245 232);
+  --color-text-soft: rgb(198 220 206);
+  --color-text-faint: rgb(118 145 128);
+  --color-text-on-row: rgb(236 252 240);
 }
 
 html {
@@ -11,13 +64,13 @@ html {
 }
 
 body {
-  @apply bg-slate-900 font-sans text-slate-400 antialiased selection:bg-teal-300 selection:text-teal-900;
+  @apply bg-page font-sans text-slate-400 antialiased selection:bg-accent selection:text-accent-ink;
   font-feature-settings: var(--font-feature-inter);
 }
 
 @layer base {
   a:hover {
-    @apply text-teal-300;
+    @apply text-accent;
   }
 
   h1 a:hover {

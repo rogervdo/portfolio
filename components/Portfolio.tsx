@@ -5,13 +5,22 @@ import Image from "next/image";
 import { useEffect, useState } from "react";
 import { SideNav } from "@/components/SideNav";
 import { Spotlight } from "@/components/Spotlight";
+import { ThemeMenu } from "@/components/ThemeMenu";
 
 const SECTION_IDS = ["about", "experience", "projects", "leadership"] as const;
 
+/** Brittany-style list row hover: panel fill, dim siblings, inset hairline (projects + leadership + experience). */
+const LIST_ITEM_HOVER_PANEL =
+  "group relative lg:-mx-6 lg:rounded-md lg:border lg:border-transparent lg:bg-transparent lg:p-6 lg:transition-colors lg:hover:border-transparent lg:hover:bg-panel lg:group-hover/list:opacity-60 lg:hover:shadow-[inset_0_1px_0_0_var(--color-divider-inset)] lg:hover:!opacity-100";
+
 const SOCIAL = [
-  { label: "GitHub", href: "https://github.com/rogervdo" },
-  { label: "LinkedIn", href: "https://www.linkedin.com/in/rogeliojesus" },
-  { label: "Email", href: "mailto:rogervdo@icloud.com" },
+  { kind: "github" as const, label: "GitHub", href: "https://github.com/rogervdo" },
+  {
+    kind: "linkedin" as const,
+    label: "LinkedIn",
+    href: "https://www.linkedin.com/in/rogeliojesus",
+  },
+  { kind: "email" as const, label: "Email", href: "mailto:rogervdo@icloud.com" },
 ] as const;
 
 const JOBS = [
@@ -64,33 +73,77 @@ const PROJECTS = [
 
 const LEADERSHIP: readonly {
   title: string;
-  year: string;
   body: string;
   href?: string;
   imageSlug: string;
 }[] = [
   {
     title: "Focus Coding Group — co-founder",
-    year: "2023 — Present",
     body:
       'Co-founded Focus Coding Group with the objective of improving how we practice and level up as engineers. Members have landed roles at Oracle, Pinterest, C3.ai, Accenture, and Softtek.',
     imageSlug: "L1-focus",
   },
   {
     title: "HackMTY 2025 — Capital One track (Cappie)",
-    year: "2025",
     body: "Hackathon delivery for the Capital One fintech challenge: AI-forward banking UX with personalized coaching—FastAPI backend, MySQL, and Gemini for categorization and savings recommendations.",
     href: "https://github.com/rogervdo/Hackmty2025-CapitalOne",
     imageSlug: "L2-hackmty",
   },
   {
     title: "Code or Die — LeetCode companion extension",
-    year: "2024 — Present",
     body: "Open-source Chrome extension (forked from LeetNet) for friend activity feeds, difficulty leaderboards, daily rankings, and a strikes system—with aggressive client-side caching to limit API chatter.",
     href: "https://github.com/rogervdo/Code-or-Die",
     imageSlug: "L3-code-or-die",
   },
 ];
+
+/** Brand mark — inherits `currentColor` from the parent link. */
+function GitHubIcon({ className }: { className?: string }) {
+  return (
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      viewBox="0 0 24 24"
+      fill="currentColor"
+      aria-hidden
+      className={`h-8 w-8 shrink-0 ${className ?? ""}`}
+    >
+      <path
+        fillRule="evenodd"
+        clipRule="evenodd"
+        d="M12 2C6.477 2 2 6.463 2 11.97c0 4.404 2.865 8.14 6.839 9.458.5.092.682-.216.682-.481 0-.237-.009-.866-.013-1.702c-2.782.603-3.369-1.342-3.369-1.342-.454-1.155-1.11-1.463-1.11-1.463-.908-.62.069-.608.069-.608 1.003.07 1.531 1.03 1.531 1.03.892 1.529 2.341 1.087 2.91.831.092-.646.35-1.086.636-1.336-2.22-.253-4.555-1.111-4.555-4.943 0-1.091.39-1.984 1.029-2.683-.103-.253-.446-1.27.098-2.647 0 0 .84-.269 2.75 1.025A9.578 9.578 0 0112 6.836c.85.004 1.705.114 2.504.337 1.909-1.294 2.747-1.025 2.747-1.025.546 1.377.203 2.394.1 2.647.64.699 1.028 1.592 1.028 2.683 0 3.842-2.339 4.687-4.566 4.935.359.309.678.919.678 1.852 0 1.336-.012 2.415-.012 2.743 0 .267.18.578.688.48C19.138 20.107 22 16.373 22 11.969 22 6.463 17.522 2 12 2z"
+      />
+    </svg>
+  );
+}
+
+function LinkedInIcon({ className }: { className?: string }) {
+  return (
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      viewBox="0 0 24 24"
+      fill="currentColor"
+      aria-hidden
+      className={`h-8 w-8 shrink-0 ${className ?? ""}`}
+    >
+      <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z" />
+    </svg>
+  );
+}
+
+function EmailIcon({ className }: { className?: string }) {
+  return (
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      viewBox="0 0 24 24"
+      fill="currentColor"
+      aria-hidden
+      className={`h-8 w-8 shrink-0 ${className ?? ""}`}
+    >
+      <path d="M1.5 8.67v8.58a3 3 0 0 0 3 3h15a3 3 0 0 0 3-3V8.67l-8.928 5.493a3 3 0 0 1-3.144 0L1.5 8.67Z" />
+      <path d="M22.5 6.908V6.75a3 3 0 0 0-3-3h-15a3 3 0 0 0-3 3v.158l9.714 5.978a1.5 1.5 0 0 0 1.572 0L22.5 6.908Z" />
+    </svg>
+  );
+}
 
 /** Small → used on “archive” links (Brittany uses a horizontal chevron-like arrow here). */
 function ArrowRightTiny(props: React.SVGProps<SVGSVGElement>) {
@@ -169,7 +222,7 @@ export default function Portfolio() {
 
       <a
         href="#about"
-        className="fixed left-4 top-4 z-[60] -translate-y-28 rounded-md bg-teal-300 px-4 py-2 text-sm font-semibold text-teal-900 shadow transition focus-visible:translate-y-0"
+        className="fixed left-4 top-4 z-[60] -translate-y-28 rounded-md bg-accent px-4 py-2 text-sm font-semibold text-accent-ink shadow transition focus-visible:translate-y-0"
       >
         Skip to content
       </a>
@@ -195,22 +248,22 @@ export default function Portfolio() {
             <nav className="mt-10 lg:hidden" aria-label="Jump links">
               <ul className="flex flex-wrap gap-x-6 gap-y-2 text-xs font-semibold uppercase tracking-widest text-slate-500">
                 <li>
-                  <a href="#about" className="hover:text-slate-200">
+                  <a href="#about" className="hover:text-bright">
                     About
                   </a>
                 </li>
                 <li>
-                  <a href="#experience" className="hover:text-slate-200">
+                  <a href="#experience" className="hover:text-bright">
                     Experience
                   </a>
                 </li>
                 <li>
-                  <a href="#projects" className="hover:text-slate-200">
+                  <a href="#projects" className="hover:text-bright">
                     Projects
                   </a>
                 </li>
                 <li>
-                  <a href="#leadership" className="hover:text-slate-200">
+                  <a href="#leadership" className="hover:text-bright">
                     Leadership
                   </a>
                 </li>
@@ -219,7 +272,7 @@ export default function Portfolio() {
           </div>
 
           <footer className="pb-16 lg:mt-auto lg:pb-0">
-            <ul className="flex flex-wrap gap-x-8 gap-y-2 text-xs font-semibold uppercase tracking-widest text-slate-500">
+            <ul className="flex flex-wrap items-center gap-x-8 gap-y-2 text-xs font-semibold uppercase tracking-widest">
               {SOCIAL.map((s) => (
                 <li key={s.href}>
                   <Link
@@ -227,9 +280,16 @@ export default function Portfolio() {
                     {...(s.href.startsWith("mailto:")
                       ? {}
                       : { target: "_blank", rel: "noreferrer noopener" })}
-                    className="hover:text-teal-300"
+                    aria-label={s.label}
+                    className="inline-flex items-center text-slate-300 transition-colors hover:text-accent focus-visible:text-accent"
                   >
-                    {s.label}
+                    {s.kind === "github" ? (
+                      <GitHubIcon />
+                    ) : s.kind === "linkedin" ? (
+                      <LinkedInIcon />
+                    ) : (
+                      <EmailIcon />
+                    )}
                   </Link>
                 </li>
               ))}
@@ -238,7 +298,7 @@ export default function Portfolio() {
         </aside>
 
         <main className="lg:flex lg:w-[52%] lg:flex-col lg:py-24">
-          <article className="pb-24 text-base leading-relaxed text-slate-400 lg:pb-16">
+          <article className="pb-16 text-base leading-relaxed text-slate-400 lg:pb-12">
             <section id="about" className="scroll-mt-16 lg:scroll-mt-24">
               <h2 className="sr-only">About</h2>
               <div className="flex flex-col gap-4 lg:gap-12">
@@ -270,7 +330,7 @@ export default function Portfolio() {
               <div className="mb-12 flex justify-end">
                 <Link
                   href="/resume.pdf"
-                  className="group/link inline-flex items-baseline gap-x-1 text-[11px] font-semibold uppercase tracking-widest text-slate-200 transition-colors hover:text-teal-300 focus-visible:text-teal-300 sm:text-[12px]"
+                  className="group/link inline-flex items-baseline gap-x-1 text-[11px] font-semibold uppercase tracking-widest text-slate-200 transition-colors hover:text-accent focus-visible:text-accent sm:text-[12px]"
                 >
                   <span aria-hidden className="-translate-x-px text-slate-400">
                     [
@@ -286,7 +346,7 @@ export default function Portfolio() {
               <ol className="group/list space-y-3">
                 {JOBS.map((job) => (
                   <li key={`${job.range}-${job.company}`}>
-                    <div className="group relative lg:-mx-6 lg:rounded-md lg:border lg:border-transparent lg:bg-transparent lg:p-6 lg:transition-colors lg:hover:border-transparent lg:hover:bg-slate-800/50 lg:group-hover/list:opacity-60 lg:hover:shadow-[inset_0_1px_0_0_rgba(148,163,184,0.15)] lg:hover:!opacity-100">
+                    <div className={LIST_ITEM_HOVER_PANEL}>
                       <a href={job.href} className="group/link-card relative mb-px block pb-12 focus-visible:z-40 focus-visible:outline-none lg:pb-8">
                         <span aria-hidden className="absolute inset-0 rounded-lg lg:-inset-x-px" />
                         <div className="relative z-10 grid gap-y-px sm:auto-rows-min sm:grid-cols-8 sm:gap-x-8 lg:gap-x-10">
@@ -297,7 +357,7 @@ export default function Portfolio() {
                             <span className="block text-xl font-semibold tracking-tight text-slate-200">
                               <span className="text-slate-200">{job.title}</span>
                               <span className="text-slate-200"> · </span>
-                              <span className="transition-colors hover:text-teal-300 hover:underline hover:underline-offset-4 hover:transition-none focus-visible:text-teal-300">
+                              <span className="transition-colors hover:text-accent hover:underline hover:underline-offset-4 hover:transition-none focus-visible:text-accent">
                                 <span className="inline-flex items-center gap-x-2 whitespace-nowrap">
                                   <span>{job.company}</span>
                                   <ArrowUpRightTiny className="-translate-y-px opacity-95" />
@@ -313,7 +373,7 @@ export default function Portfolio() {
                               {job.chips.map((c) => (
                                 <li
                                   key={c}
-                                  className="rounded-full bg-teal-400/10 px-3 py-1 text-xs font-medium tracking-wide text-teal-300"
+                                  className="rounded-full bg-chip px-3 py-1 text-xs font-medium tracking-wide text-accent"
                                 >
                                   {c}
                                 </li>
@@ -329,58 +389,60 @@ export default function Portfolio() {
 
               <Link
                 href="/resume.pdf"
-                className="group/link mt-14 inline-flex items-center gap-x-2 text-[15px] font-semibold text-slate-200 transition-colors hover:text-teal-300 focus-visible:text-teal-300 sm:text-base"
+                className="group/link mt-14 inline-flex items-center gap-x-2 text-[15px] font-semibold text-slate-200 transition-colors hover:text-accent focus-visible:text-accent sm:text-base"
               >
                 View full résumé <ArrowUpRightTiny className="translate-y-[0.11em]" />
               </Link>
             </section>
 
-            <section id="projects" className="scroll-mt-24 lg:pb-28">
-              <h2 className="mb-14 text-xs font-semibold uppercase tracking-widest text-slate-200">Featured projects</h2>
-              <ul className="space-y-24">
+            <section id="projects" className="scroll-mt-24 lg:pb-16">
+              <h2 className="mb-8 text-xs font-semibold uppercase tracking-widest text-slate-200">Featured projects</h2>
+              <ul className="group/list space-y-10">
                 {PROJECTS.map((p, index) => {
                   const primary = p.links[0]?.href ?? "#projects";
                   return (
                     <li key={p.title}>
                       <article>
-                        <div className="relative z-10 grid gap-12 sm:grid-cols-8 sm:items-start sm:gap-x-8 sm:gap-y-0 lg:gap-x-10">
-                          <div className="sm:col-span-2 sm:row-start-1">
-                            <Image
-                              className="aspect-video w-full shrink-0 rounded-lg border border-slate-200/10 bg-slate-800/70 object-cover transition-colors sm:aspect-[4/3] sm:max-w-[150px]"
-                              src={`https://placehold.co/800x600/122131/75879b/png?font=mono&text=P${index + 1}`}
-                              width={300}
-                              height={225}
-                              alt=""
-                              sizes="(min-width: 640px) 150px, 100vw"
-                            />
-                          </div>
-                          <div className="mt-10 sm:col-span-6 sm:mt-0 sm:flex sm:flex-col sm:justify-center">
-                            <h3 className="text-xl font-semibold tracking-tight text-slate-200">
-                              <a
-                                href={primary}
-                                target="_blank"
-                                rel="noreferrer noopener"
-                                className="group/card mb-3 inline-flex items-center gap-x-2 text-sm font-semibold leading-snug tracking-tight text-slate-200 transition-colors hover:text-teal-300 hover:underline hover:underline-offset-4 hover:transition-none sm:mb-2 sm:text-base xl:text-lg"
-                              >
-                                {p.title}
-                                <ArrowUpRightTiny className="-translate-y-px opacity-95" />
-                              </a>
-                            </h3>
-                            <p className="text-sm">{p.body}</p>
-                            <ul className="mt-4 flex flex-wrap gap-x-4 gap-y-2 text-[11px] font-semibold uppercase tracking-wider text-teal-300/90">
-                              {p.links.map((l) => (
-                                <li key={l.href}>
-                                  <a
-                                    href={l.href}
-                                    target="_blank"
-                                    rel="noreferrer noopener"
-                                    className="transition-colors hover:text-teal-300 hover:underline hover:underline-offset-4"
-                                  >
-                                    {l.label}
-                                  </a>
-                                </li>
-                              ))}
-                            </ul>
+                        <div className={LIST_ITEM_HOVER_PANEL}>
+                          <div className="relative z-10 grid gap-8 sm:grid-cols-8 sm:items-start sm:gap-x-8 sm:gap-y-0 lg:gap-x-10">
+                            <div className="sm:col-span-2 sm:row-start-1">
+                              <Image
+                                className="aspect-video w-full shrink-0 rounded-lg border border-borderSubtle bg-media object-cover transition-colors sm:aspect-[4/3] sm:max-w-[150px]"
+                                src={`https://placehold.co/800x600/122131/75879b/png?font=mono&text=P${index + 1}`}
+                                width={300}
+                                height={225}
+                                alt=""
+                                sizes="(min-width: 640px) 150px, 100vw"
+                              />
+                            </div>
+                            <div className="mt-6 sm:col-span-6 sm:mt-0 sm:flex sm:flex-col sm:justify-center">
+                              <h3 className="text-xl font-semibold tracking-tight text-slate-200">
+                                <a
+                                  href={primary}
+                                  target="_blank"
+                                  rel="noreferrer noopener"
+                                  className="group/card mb-3 inline-flex items-center gap-x-2 text-sm font-semibold leading-snug tracking-tight text-slate-200 transition-colors hover:text-accent hover:underline hover:underline-offset-4 hover:transition-none sm:mb-2 sm:text-base xl:text-lg"
+                                >
+                                  {p.title}
+                                  <ArrowUpRightTiny className="-translate-y-px opacity-95" />
+                                </a>
+                              </h3>
+                              <p className="text-sm">{p.body}</p>
+                              <ul className="mt-4 flex flex-wrap gap-x-4 gap-y-2 text-[11px] font-semibold uppercase tracking-wider text-accent-muted">
+                                {p.links.map((l) => (
+                                  <li key={l.href}>
+                                    <a
+                                      href={l.href}
+                                      target="_blank"
+                                      rel="noreferrer noopener"
+                                      className="transition-colors hover:text-accent hover:underline hover:underline-offset-4"
+                                    >
+                                      {l.label}
+                                    </a>
+                                  </li>
+                                ))}
+                              </ul>
+                            </div>
                           </div>
                         </div>
                       </article>
@@ -392,18 +454,18 @@ export default function Portfolio() {
                 href="https://github.com/rogervdo?tab=repositories"
                 target="_blank"
                 rel="noreferrer noopener"
-                className="group/link mt-16 inline-flex items-center gap-x-2 text-[15px] font-semibold text-slate-200 transition-colors hover:text-teal-300 focus-visible:text-teal-300 sm:text-base"
+                className="group/link mt-10 inline-flex items-center gap-x-2 text-[15px] font-semibold text-slate-200 transition-colors hover:text-accent focus-visible:text-accent sm:text-base"
               >
                 More repositories on GitHub <ArrowRightTiny />
               </a>
             </section>
 
             <section id="leadership" className="scroll-mt-24 lg:scroll-mt-24">
-              <h2 className="mb-14 text-xs font-semibold uppercase tracking-widest text-slate-200">Leadership activities</h2>
-              <ul className="space-y-20">
+              <h2 className="mb-8 text-xs font-semibold uppercase tracking-widest text-slate-200">Leadership activities</h2>
+              <ul className="group/list space-y-10">
                 {LEADERSHIP.map((item, index) => {
                   const HeadingContent = (
-                    <span className="group/link inline-flex items-center gap-x-2 text-sm font-semibold leading-snug text-slate-200 transition-colors hover:text-teal-300 hover:underline hover:underline-offset-4 hover:transition-none focus-visible:text-teal-300 sm:text-[15px] lg:text-[15px]">
+                    <span className="group/link inline-flex items-center gap-x-2 text-sm font-semibold leading-snug text-slate-200 transition-colors hover:text-accent hover:underline hover:underline-offset-4 hover:transition-none focus-visible:text-accent sm:text-[15px] lg:text-[15px]">
                       <span>{item.title}</span>
                       {item.href ? <ArrowUpRightTiny className="-translate-y-px shrink-0" /> : null}
                     </span>
@@ -412,41 +474,37 @@ export default function Portfolio() {
                   return (
                     <li key={item.title}>
                       <article>
-                        <div className="outline-offset-8 transition-colors focus-within:z-40">
-                          <div className="relative z-10 grid gap-12 sm:grid-cols-8 sm:items-start sm:gap-x-8 sm:gap-y-px lg:gap-x-10">
-                            <div className="relative sm:col-span-2">
-                              <Image
-                                alt=""
-                                className="aspect-[5/4] w-full rounded-lg border border-slate-200/10 bg-slate-800/70 object-cover transition-colors sm:aspect-[4/3] sm:max-w-[150px]"
-                                height={225}
-                                src={`https://placehold.co/800x560/172033/8492a9/png?font=mono&text=${encodeURIComponent(item.imageSlug)}`}
-                                width={300}
-                                sizes="(min-width: 640px) 150px, 100vw"
-                                loading={index === 0 ? "eager" : "lazy"}
-                              />
-                            </div>
-                            <div className="sm:col-span-6 sm:flex sm:min-h-full sm:flex-col sm:justify-center">
-                              <time
-                                className="text-xs font-semibold uppercase tracking-wide text-slate-500 lg:translate-y-[0.15rem]"
-                                dateTime={item.year.split("—")[0]?.trim() ?? item.year}
-                              >
-                                {item.year}
-                              </time>
-                              <h3 className="mt-3 text-xl font-semibold tracking-tight text-slate-200 lg:mt-4">
-                                {item.href ? (
-                                  <a
-                                    href={item.href}
-                                    target="_blank"
-                                    rel="noreferrer noopener"
-                                    className="rounded-md outline-offset-4 focus-visible:outline focus-visible:outline-2 focus-visible:outline-teal-400/70"
-                                  >
-                                    {HeadingContent}
-                                  </a>
-                                ) : (
-                                  HeadingContent
-                                )}
-                              </h3>
-                              <p className="mt-3 max-w-prose text-sm leading-relaxed text-slate-400 lg:mt-4">{item.body}</p>
+                        <div className={LIST_ITEM_HOVER_PANEL}>
+                          <div className="outline-offset-8 transition-colors focus-within:z-40">
+                            <div className="relative z-10 grid gap-8 sm:grid-cols-8 sm:items-start sm:gap-x-8 sm:gap-y-px lg:gap-x-10">
+                              <div className="relative sm:col-span-2">
+                                <Image
+                                  alt=""
+                                  className="aspect-[5/4] w-full rounded-lg border border-borderSubtle bg-media object-cover transition-colors sm:aspect-[4/3] sm:max-w-[150px]"
+                                  height={225}
+                                  src={`https://placehold.co/800x560/172033/8492a9/png?font=mono&text=${encodeURIComponent(item.imageSlug)}`}
+                                  width={300}
+                                  sizes="(min-width: 640px) 150px, 100vw"
+                                  loading={index === 0 ? "eager" : "lazy"}
+                                />
+                              </div>
+                              <div className="sm:col-span-6 sm:flex sm:min-h-full sm:flex-col sm:justify-center">
+                                <h3 className="text-xl font-semibold tracking-tight text-slate-200">
+                                  {item.href ? (
+                                    <a
+                                      href={item.href}
+                                      target="_blank"
+                                      rel="noreferrer noopener"
+                                      className="rounded-md outline-offset-4 focus-visible:outline focus-visible:outline-2 focus-visible:outline-focus"
+                                    >
+                                      {HeadingContent}
+                                    </a>
+                                  ) : (
+                                    HeadingContent
+                                  )}
+                                </h3>
+                                <p className="mt-2 max-w-prose text-sm leading-relaxed text-slate-400 lg:mt-3">{item.body}</p>
+                              </div>
                             </div>
                           </div>
                         </div>
@@ -460,13 +518,15 @@ export default function Portfolio() {
 
           <p className="mt-8 max-w-md text-sm leading-normal text-slate-500 lg:sticky lg:top-28 lg:z-40 lg:mt-12 lg:self-start lg:leading-relaxed">
             Adapted layout inspired by{" "}
-            <a href="https://brittanychiang.com" className="font-medium text-slate-500 hover:text-teal-300">
+            <a href="https://brittanychiang.com" className="font-medium text-slate-500 hover:text-accent">
               brittanychiang.com
             </a>
             . Built with Next.js · TypeScript · Tailwind CSS.
           </p>
         </main>
       </div>
+
+      <ThemeMenu />
     </div>
   );
 }

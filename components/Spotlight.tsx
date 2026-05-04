@@ -16,7 +16,7 @@ export function Spotlight() {
     <div
       className="pointer-events-none fixed inset-0 z-[5] opacity-75 transition-opacity duration-300 motion-reduce:opacity-60"
       style={{
-        background: `radial-gradient(600px circle at ${pos.x}px ${pos.y}px, rgba(29, 78, 216, 0.15), transparent 80%)`,
+        background: `radial-gradient(600px circle at ${pos.x}px ${pos.y}px, rgba(var(--color-spotlight-rgb), 0.15), transparent 80%)`,
       }}
       aria-hidden
     />

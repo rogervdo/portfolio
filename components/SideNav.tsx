@@ -26,12 +26,12 @@ export function SideNav({ active, className }: SideNavProps) {
             <li key={item.href}>
               <a
                 href={item.href}
-                className="group flex items-center gap-4 py-3 focus-visible:text-slate-200"
+                className="group flex items-center gap-4 py-3 focus-visible:text-bright"
               >
                 <span
                   className={cn(
-                    "block h-px bg-slate-600 transition-[width,background-color] duration-300 motion-reduce:transition-none",
-                    isActive ? "w-16 bg-slate-200" : "w-8 group-hover:w-16 group-hover:bg-slate-200 group-focus-visible:w-16",
+                    "block h-px bg-navLine transition-[width,background-color] duration-300 motion-reduce:transition-none",
+                    isActive ? "w-16 bg-navLine-active" : "w-8 group-hover:w-16 group-hover:bg-navLine-active group-focus-visible:w-16",
                   )}
                   aria-hidden
                 />
@@ -39,8 +39,8 @@ export function SideNav({ active, className }: SideNavProps) {
                   className={cn(
                     "text-xs font-bold uppercase tracking-widest transition-colors",
                     isActive
-                      ? "text-slate-200"
-                      : "text-slate-500 group-hover:text-slate-200 group-focus-visible:text-slate-200",
+                      ? "text-bright"
+                      : "text-slate-500 group-hover:text-bright group-focus-visible:text-bright",
                   )}
                 >
                   {item.label}
