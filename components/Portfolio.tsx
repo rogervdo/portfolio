@@ -6,59 +6,91 @@ import { useEffect, useState } from "react";
 import { SideNav } from "@/components/SideNav";
 import { Spotlight } from "@/components/Spotlight";
 
-const SECTION_IDS = ["about", "experience", "projects", "writing"] as const;
+const SECTION_IDS = ["about", "experience", "projects", "leadership"] as const;
 
 const SOCIAL = [
-  { label: "GitHub", href: "https://github.com" },
-  { label: "LinkedIn", href: "https://linkedin.com" },
-  { label: "CodePen", href: "https://codepen.io" },
+  { label: "GitHub", href: "https://github.com/rogervdo" },
+  { label: "LinkedIn", href: "https://www.linkedin.com/in/rogeliojesus" },
+  { label: "Email", href: "mailto:rogervdo@icloud.com" },
 ] as const;
 
 const JOBS = [
   {
-    range: "2024 — Present",
-    title: "Senior Engineer",
-    href: "#",
-    company: "Example Co",
+    range: "July 2025 — Present",
+    title: "Junior Software Engineer",
+    href: "#experience",
+    company: "Hanova Consulting",
     lines: [
-      "Led UI architecture for flagship surfaces; shipped accessible components and tightened performance budgets.",
-      "Partnered across design and product to evolve the design language and rollout plan.",
+      "Developed an insurance policy management system with OpenAI-powered parsing and OCR, integrated with Odoo—Python-focused backend work and policy–claim database logic.",
+      "Inherited and maintained a FastAPI microservice with Selenium automation for insurance portals, webhooks, database operations, and end-to-end tests across providers.",
+      "Built a realtime n8n pipeline from spreadsheets into a CRM, cutting manual data entry time by about 95%.",
+      "Led adoption of GitHub Issues and Projects across the company with standardized workflows for bugs, features, and releases.",
     ],
-    chips: ["TypeScript", "React", "Next.js", "Storybook"],
+    chips: ["Python", "FastAPI", "Odoo", "OpenAI", "n8n", "Selenium", "PostgreSQL"],
   },
-  {
-    range: "2019 — 2024",
-    title: "Engineer",
-    href: "#",
-    company: "Previous Studio",
-    lines: ["Built marketing sites and product apps with tight accessibility and performance budgets."],
-    chips: ["React", "Node", "Contentful"],
-  },
-];
+] as const;
 
 const PROJECTS = [
   {
-    title: "Product dashboard redesign",
-    body: "A focused rethink of onboarding and workflows with stronger tables, filters, and empty states.",
+    title: "Nori — AI requirements assistant (NortDev)",
+    body: "Banorte-aligned web stack for structured requirements: conversational IA, RAG over organizational knowledge, and exportable corporate docs.",
+    links: [
+      { label: "Backend (API)", href: "https://github.com/nortdevv/nori-api" },
+      { label: "Frontend", href: "https://github.com/nortdevv/nori" },
+    ],
   },
   {
-    title: "Design system rollout",
-    body: "Theme tokens, component APIs, and docs that helped teams migrate without thrash.",
-  },
-];
-
-const WRITINGS = [
-  {
-    title: "How we reduced UI regressions during refactors",
-    year: "2026",
-    imageSlug: "W1-regressions",
+    title: "Machtia — soft skills for the coffee sector",
+    body: "RAG with semantic and hybrid search, embeddings, and an AI chat assistant wired to Apple Intelligence tooling. FastAPI backend, Streamlit admin, SwiftUI iOS client, PostgreSQL with pgvector.",
+    links: [
+      { label: "iOS app", href: "https://github.com/Bryan-Meza/Coffee-Overflow-MachtiaApp" },
+      { label: "Desktop (Streamlit)", href: "https://github.com/rogervdo/MachtiaStreamlit" },
+    ],
   },
   {
-    title: "Checklists that actually steer accessibility reviews",
-    year: "2024",
-    imageSlug: "W2-accessibility",
+    title: "OXXO training platform",
+    body: "Advisor training stack: ASP.NET Core REST APIs and Razor Pages with Unity WebGL scenarios. Modular C# services for session lifecycle, check-in/out, auth, and decision tracking for large concurrent cohorts.",
+    links: [
+      { label: "Unity", href: "https://github.com/rogervdo/oxxo-unity" },
+      { label: "Web", href: "https://github.com/rogervdo/oxxo-web" },
+    ],
+  },
+  {
+    title: "YouTube Stamina Focus",
+    body: "Chromium (Manifest V3) extension for softer daily limits on YouTube: caps, optional countdowns, comment gating, quality nudges, and thumbnail downgrades—everything stays on-device.",
+    links: [{ label: "Repository", href: "https://github.com/rogervdo/Stamina" }],
   },
 ] as const;
+
+const LEADERSHIP: readonly {
+  title: string;
+  year: string;
+  body: string;
+  href?: string;
+  imageSlug: string;
+}[] = [
+  {
+    title: "Focus Coding Group — co-founder",
+    year: "2023 — Present",
+    body:
+      'Co-founded Focus Coding Group with the objective of improving how we practice and level up as engineers. Members have landed roles at Oracle, Pinterest, C3.ai, Accenture, and Softtek.',
+    imageSlug: "L1-focus",
+  },
+  {
+    title: "HackMTY 2025 — Capital One track (Cappie)",
+    year: "2025",
+    body: "Hackathon delivery for the Capital One fintech challenge: AI-forward banking UX with personalized coaching—FastAPI backend, MySQL, and Gemini for categorization and savings recommendations.",
+    href: "https://github.com/rogervdo/Hackmty2025-CapitalOne",
+    imageSlug: "L2-hackmty",
+  },
+  {
+    title: "Code or Die — LeetCode companion extension",
+    year: "2024 — Present",
+    body: "Open-source Chrome extension (forked from LeetNet) for friend activity feeds, difficulty leaderboards, daily rankings, and a strikes system—with aggressive client-side caching to limit API chatter.",
+    href: "https://github.com/rogervdo/Code-or-Die",
+    imageSlug: "L3-code-or-die",
+  },
+];
 
 /** Small → used on “archive” links (Brittany uses a horizontal chevron-like arrow here). */
 function ArrowRightTiny(props: React.SVGProps<SVGSVGElement>) {
@@ -100,8 +132,6 @@ function ArrowUpRightTiny({ className }: { className?: string }) {
     </svg>
   );
 }
-
-
 
 function useSectionSpy(sectionIds: readonly string[]) {
   const [active, setActive] = useState<string | null>(() => sectionIds[0] ?? null);
@@ -149,13 +179,14 @@ export default function Portfolio() {
           <div>
             <header>
               <h1 className="text-4xl font-bold tracking-tight text-slate-200 sm:text-5xl">
-                <Link href="/">Jordan Lee</Link>
+                <Link href="/">Rogelio Villarreal</Link>
               </h1>
               <p className="mt-4 max-w-xs text-lg font-medium leading-normal text-slate-200 lg:text-xl">
-                Senior frontend engineer
+                Junior Software Engineer · CS @ Tec de Monterrey
               </p>
               <p className="mt-4 max-w-xs text-base leading-normal text-slate-500">
-                I build accessible interfaces with care for typography, motion, and details.
+                Full-stack delivery with pragmatic AI integrations—FastAPI and Python backends, careful data modeling,
+                and iOS when the problem calls for it.
               </p>
 
               <SideNav active={active} className="mt-16 hidden lg:block" />
@@ -179,8 +210,8 @@ export default function Portfolio() {
                   </a>
                 </li>
                 <li>
-                  <a href="#writing" className="hover:text-slate-200">
-                    Writing
+                  <a href="#leadership" className="hover:text-slate-200">
+                    Leadership
                   </a>
                 </li>
               </ul>
@@ -191,7 +222,13 @@ export default function Portfolio() {
             <ul className="flex flex-wrap gap-x-8 gap-y-2 text-xs font-semibold uppercase tracking-widest text-slate-500">
               {SOCIAL.map((s) => (
                 <li key={s.href}>
-                  <Link href={s.href} target="_blank" rel="noreferrer noopener" className="hover:text-teal-300">
+                  <Link
+                    href={s.href}
+                    {...(s.href.startsWith("mailto:")
+                      ? {}
+                      : { target: "_blank", rel: "noreferrer noopener" })}
+                    className="hover:text-teal-300"
+                  >
                     {s.label}
                   </Link>
                 </li>
@@ -206,12 +243,17 @@ export default function Portfolio() {
               <h2 className="sr-only">About</h2>
               <div className="flex flex-col gap-4 lg:gap-12">
                 <p>
-                  Replace this paragraph with your own story — your focus on craft, accessibility, and product quality.
-                  Short paragraphs scan well in this layout.
+                  I&apos;m <span className="text-slate-300">Rogelio Jesús Villarreal De Ochoa</span>, pursuing a Bachelor
+                  of Science in Computer Science and Technology at{" "}
+                  <span className="text-slate-300">Tecnológico de Monterrey</span> (August 2023 — June 2027) with a GPA of{" "}
+                  93.1/100 (3.73/4.0). My coursework spans OOP, data structures &amp; algorithms, database systems,
+                  software construction, multi-agent systems &amp; computational graphics, and cybersecurity.
                 </p>
                 <p>
-                  Today I work across design systems and app surfaces, collaborating with designers and teammates to ship
-                  resilient patterns customers can rely on — without sacrificing polish.
+                  Outside of class I ship product-style systems: integrations with LLM and OCR providers, realtime
+                  automation pipelines, Swift and SwiftUI when the interface needs to be native, and Postgres or
+                  MySQL backends via FastAPI. I care about reproducible workflows—issues, milestones, reviews—and about
+                  making AI assist without replacing clear requirements.
                 </p>
               </div>
             </section>
@@ -296,17 +338,15 @@ export default function Portfolio() {
             <section id="projects" className="scroll-mt-24 lg:pb-28">
               <h2 className="mb-14 text-xs font-semibold uppercase tracking-widest text-slate-200">Featured projects</h2>
               <ul className="space-y-24">
-                {PROJECTS.map((p, index) => (
-                  <li key={p.title}>
-                    <article>
-                      <a
-                        href="#"
-                        className="group/card relative block rounded-md pb-px outline-offset-8 transition-colors focus-visible:z-40 focus-visible:outline-none"
-                      >
+                {PROJECTS.map((p, index) => {
+                  const primary = p.links[0]?.href ?? "#projects";
+                  return (
+                    <li key={p.title}>
+                      <article>
                         <div className="relative z-10 grid gap-12 sm:grid-cols-8 sm:items-start sm:gap-x-8 sm:gap-y-0 lg:gap-x-10">
                           <div className="sm:col-span-2 sm:row-start-1">
                             <Image
-                              className="aspect-video w-full shrink-0 rounded-lg border border-slate-200/10 bg-slate-800/70 object-cover transition-colors group-hover/card:border-slate-200/30 sm:aspect-[4/3] sm:max-w-[150px]"
+                              className="aspect-video w-full shrink-0 rounded-lg border border-slate-200/10 bg-slate-800/70 object-cover transition-colors sm:aspect-[4/3] sm:max-w-[150px]"
                               src={`https://placehold.co/800x600/122131/75879b/png?font=mono&text=P${index + 1}`}
                               width={300}
                               height={225}
@@ -316,68 +356,104 @@ export default function Portfolio() {
                           </div>
                           <div className="mt-10 sm:col-span-6 sm:mt-0 sm:flex sm:flex-col sm:justify-center">
                             <h3 className="text-xl font-semibold tracking-tight text-slate-200">
-                              <span className="group/link mb-3 inline-flex items-center gap-x-2 text-sm font-semibold leading-snug tracking-tight text-slate-200 transition-colors hover:text-teal-300 hover:underline hover:underline-offset-4 hover:transition-none group-hover/card:text-teal-300 sm:mb-2 sm:text-base xl:text-lg">
+                              <a
+                                href={primary}
+                                target="_blank"
+                                rel="noreferrer noopener"
+                                className="group/card mb-3 inline-flex items-center gap-x-2 text-sm font-semibold leading-snug tracking-tight text-slate-200 transition-colors hover:text-teal-300 hover:underline hover:underline-offset-4 hover:transition-none sm:mb-2 sm:text-base xl:text-lg"
+                              >
                                 {p.title}
                                 <ArrowUpRightTiny className="-translate-y-px opacity-95" />
-                              </span>
+                              </a>
                             </h3>
                             <p className="text-sm">{p.body}</p>
+                            <ul className="mt-4 flex flex-wrap gap-x-4 gap-y-2 text-[11px] font-semibold uppercase tracking-wider text-teal-300/90">
+                              {p.links.map((l) => (
+                                <li key={l.href}>
+                                  <a
+                                    href={l.href}
+                                    target="_blank"
+                                    rel="noreferrer noopener"
+                                    className="transition-colors hover:text-teal-300 hover:underline hover:underline-offset-4"
+                                  >
+                                    {l.label}
+                                  </a>
+                                </li>
+                              ))}
+                            </ul>
                           </div>
                         </div>
-                      </a>
-                    </article>
-                  </li>
-                ))}
+                      </article>
+                    </li>
+                  );
+                })}
               </ul>
-              <Link
-                href="/projects"
+              <a
+                href="https://github.com/rogervdo?tab=repositories"
+                target="_blank"
+                rel="noreferrer noopener"
                 className="group/link mt-16 inline-flex items-center gap-x-2 text-[15px] font-semibold text-slate-200 transition-colors hover:text-teal-300 focus-visible:text-teal-300 sm:text-base"
               >
-                View project archive <ArrowRightTiny />
-              </Link>
+                More repositories on GitHub <ArrowRightTiny />
+              </a>
             </section>
 
-            <section id="writing" className="scroll-mt-24 lg:scroll-mt-24">
-              <h2 className="mb-14 text-xs font-semibold uppercase tracking-widest text-slate-200">Recent writing</h2>
+            <section id="leadership" className="scroll-mt-24 lg:scroll-mt-24">
+              <h2 className="mb-14 text-xs font-semibold uppercase tracking-widest text-slate-200">Leadership activities</h2>
               <ul className="space-y-20">
-                {WRITINGS.map((item, index) => (
-                  <li key={item.title}>
-                    <article>
-                      <a
-                        href="#"
-                        className="group/card outline-offset-8 transition-colors focus-visible:z-40 focus-visible:outline-none"
-                      >
-                        <div className="relative z-10 grid gap-12 sm:grid-cols-8 sm:items-start sm:gap-x-8 sm:gap-y-px lg:gap-x-10">
-                          <div className="relative sm:col-span-2">
-                            <Image
-                              alt=""
-                              className="aspect-[5/4] w-full rounded-lg border border-slate-200/10 bg-slate-800/70 object-cover transition-colors hover:border-slate-200/30 sm:aspect-[4/3] sm:max-w-[150px]"
-                              height={225}
-                              src={`https://placehold.co/800x560/172033/8492a9/png?font=mono&text=${encodeURIComponent(item.imageSlug)}`}
-                              width={300}
-                              sizes="(min-width: 640px) 150px, 100vw"
-                              loading={index === 0 ? "eager" : "lazy"}
-                            />
-                          </div>
-                          <div className="sm:col-span-6 sm:flex sm:min-h-full sm:flex-col sm:justify-center">
-                            <time
-                              className="text-xs font-semibold uppercase tracking-wide text-slate-500 lg:translate-y-[0.15rem]"
-                              dateTime={String(item.year)}
-                            >
-                              {item.year}
-                            </time>
-                            <h3 className="mt-3 text-xl font-semibold tracking-tight text-slate-200 lg:mt-4">
-                              <span className="group/link inline-flex items-center gap-x-2 text-sm font-semibold leading-snug text-slate-200 transition-colors hover:text-teal-300 hover:underline hover:underline-offset-4 hover:transition-none focus-visible:text-teal-300 sm:text-[15px] lg:text-[15px]">
-                                <span>{item.title}</span>
-                                <ArrowUpRightTiny className="-translate-y-px shrink-0" />
-                              </span>
-                            </h3>
+                {LEADERSHIP.map((item, index) => {
+                  const HeadingContent = (
+                    <span className="group/link inline-flex items-center gap-x-2 text-sm font-semibold leading-snug text-slate-200 transition-colors hover:text-teal-300 hover:underline hover:underline-offset-4 hover:transition-none focus-visible:text-teal-300 sm:text-[15px] lg:text-[15px]">
+                      <span>{item.title}</span>
+                      {item.href ? <ArrowUpRightTiny className="-translate-y-px shrink-0" /> : null}
+                    </span>
+                  );
+
+                  return (
+                    <li key={item.title}>
+                      <article>
+                        <div className="outline-offset-8 transition-colors focus-within:z-40">
+                          <div className="relative z-10 grid gap-12 sm:grid-cols-8 sm:items-start sm:gap-x-8 sm:gap-y-px lg:gap-x-10">
+                            <div className="relative sm:col-span-2">
+                              <Image
+                                alt=""
+                                className="aspect-[5/4] w-full rounded-lg border border-slate-200/10 bg-slate-800/70 object-cover transition-colors sm:aspect-[4/3] sm:max-w-[150px]"
+                                height={225}
+                                src={`https://placehold.co/800x560/172033/8492a9/png?font=mono&text=${encodeURIComponent(item.imageSlug)}`}
+                                width={300}
+                                sizes="(min-width: 640px) 150px, 100vw"
+                                loading={index === 0 ? "eager" : "lazy"}
+                              />
+                            </div>
+                            <div className="sm:col-span-6 sm:flex sm:min-h-full sm:flex-col sm:justify-center">
+                              <time
+                                className="text-xs font-semibold uppercase tracking-wide text-slate-500 lg:translate-y-[0.15rem]"
+                                dateTime={item.year.split("—")[0]?.trim() ?? item.year}
+                              >
+                                {item.year}
+                              </time>
+                              <h3 className="mt-3 text-xl font-semibold tracking-tight text-slate-200 lg:mt-4">
+                                {item.href ? (
+                                  <a
+                                    href={item.href}
+                                    target="_blank"
+                                    rel="noreferrer noopener"
+                                    className="rounded-md outline-offset-4 focus-visible:outline focus-visible:outline-2 focus-visible:outline-teal-400/70"
+                                  >
+                                    {HeadingContent}
+                                  </a>
+                                ) : (
+                                  HeadingContent
+                                )}
+                              </h3>
+                              <p className="mt-3 max-w-prose text-sm leading-relaxed text-slate-400 lg:mt-4">{item.body}</p>
+                            </div>
                           </div>
                         </div>
-                      </a>
-                    </article>
-                  </li>
-                ))}
+                      </article>
+                    </li>
+                  );
+                })}
               </ul>
             </section>
           </article>
@@ -387,7 +463,7 @@ export default function Portfolio() {
             <a href="https://brittanychiang.com" className="font-medium text-slate-500 hover:text-teal-300">
               brittanychiang.com
             </a>
-            . Swap this note for your own stack and tooling.
+            . Built with Next.js · TypeScript · Tailwind CSS.
           </p>
         </main>
       </div>
