@@ -13,6 +13,9 @@ const inter = Inter({
 export const metadata: Metadata = {
   title: "Rogelio Villarreal — Portfolio",
   description: "Computer Science student and software engineer — full-stack, AI integrations, and product delivery.",
+  icons: {
+    icon: "/images/Logo.png",
+  },
 };
 
 export default function RootLayout({
