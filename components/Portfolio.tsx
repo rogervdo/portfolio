@@ -1,77 +1,77 @@
-"use client";
+'use client';
 
-import Link from "next/link";
-import Image from "next/image";
-import { useEffect, useState } from "react";
-import { SideNav } from "@/components/SideNav";
-import { Spotlight } from "@/components/Spotlight";
-import { ThemeMenu } from "@/components/ThemeMenu";
+import { SideNav } from '@/components/SideNav';
+import { Spotlight } from '@/components/Spotlight';
+import { ThemeMenu } from '@/components/ThemeMenu';
+import Image from 'next/image';
+import Link from 'next/link';
+import { useEffect, useState } from 'react';
 
-const SECTION_IDS = ["about", "experience", "projects", "leadership"] as const;
+const SECTION_IDS = ['about', 'experience', 'projects', 'leadership'] as const;
 
 /** Brittany-style list row hover: panel fill, dim siblings, inset hairline (projects + leadership + experience). */
 const LIST_ITEM_HOVER_PANEL =
-  "group relative lg:-mx-6 lg:rounded-sm lg:border lg:border-transparent lg:bg-transparent lg:p-6 lg:transition-colors lg:hover:border-transparent lg:hover:bg-panel lg:group-hover/list:opacity-60 lg:hover:shadow-[inset_0_1px_0_0_var(--color-divider-inset)] lg:hover:!opacity-100";
+  'group relative lg:-mx-6 lg:rounded-sm lg:border lg:border-transparent lg:bg-transparent lg:p-6 lg:transition-colors lg:hover:border-transparent lg:hover:bg-panel lg:group-hover/list:opacity-60 lg:hover:shadow-[inset_0_1px_0_0_var(--color-divider-inset)] lg:hover:!opacity-100';
 
 const SOCIAL = [
-  { kind: "github" as const, label: "GitHub", href: "https://github.com/rogervdo" },
+  { kind: 'github' as const, label: 'GitHub', href: 'https://github.com/rogervdo' },
   {
-    kind: "linkedin" as const,
-    label: "LinkedIn",
-    href: "https://www.linkedin.com/in/rogeliojesus",
+    kind: 'linkedin' as const,
+    label: 'LinkedIn',
+    href: 'https://www.linkedin.com/in/rogeliojesus',
   },
-  { kind: "email" as const, label: "Email", href: "mailto:rogervdo@icloud.com" },
+  { kind: 'email' as const, label: 'Email', href: 'mailto:rogervdo@icloud.com' },
 ] as const;
 
 const JOBS = [
   {
-    range: "July 2025 — Present",
-    title: "Junior Software Engineer",
-    href: "#experience",
-    company: "Hanova Consulting",
+    range: 'July 2025 — Present',
+    title: 'Junior Software Engineer',
+    href: '#experience',
+    company: 'Hanova Consulting',
     lines: [
-      "Developed an insurance policy management system with OpenAI-powered parsing and OCR, integrated with Odoo—Python-focused backend work and policy–claim database logic.",
-      "Inherited and maintained a FastAPI microservice with Selenium automation for insurance portals, webhooks, database operations, and end-to-end tests across providers.",
-      "Built a realtime n8n pipeline from spreadsheets into a CRM, cutting manual data entry time by about 95%.",
-      "Led adoption of GitHub Issues and Projects across the company with standardized workflows for bugs, features, and releases.",
+      'Developed an insurance policy management system with OpenAI-powered parsing and OCR, integrated with Odoo—Python-focused backend work and policy–claim database logic.',
+      'Inherited and maintained a FastAPI microservice with Selenium automation for insurance portals, webhooks, database operations, and end-to-end tests across providers.',
+      'Built a realtime n8n pipeline from spreadsheets into a CRM, cutting manual data entry time by about 95%.',
+      'Led adoption of GitHub Issues and Projects across the company with standardized workflows for bugs, features, and releases.',
     ],
-    chips: ["Python", "FastAPI", "Odoo", "OpenAI", "n8n", "Selenium", "PostgreSQL"],
+    chips: ['Python', 'FastAPI', 'Odoo', 'OpenAI', 'n8n', 'Selenium', 'PostgreSQL'],
   },
 ] as const;
 
 const PROJECTS = [
   {
-    title: "Nori — AI requirements assistant (NortDev)",
-    body: "Banorte-aligned web stack for structured requirements: conversational IA, RAG over organizational knowledge, and exportable corporate docs.",
-    image: "/images/NORI.jpeg",
+    title: 'Nori — AI requirements assistant (NortDev)',
+    body: 'Banorte-aligned web stack for structured requirements: conversational IA, RAG over organizational knowledge, and exportable corporate docs.',
+    image: '/images/NORI.jpeg',
     links: [
-      { label: "Backend (API)", href: "https://github.com/nortdevv/nori-api" },
-      { label: "Frontend", href: "https://github.com/nortdevv/nori" },
+      { label: 'Backend (API)', href: 'https://github.com/nortdevv/nori-api' },
+      { label: 'Frontend', href: 'https://github.com/nortdevv/nori' },
     ],
   },
   {
-    title: "Machtia — soft skills for the coffee sector",
-    body: "RAG with semantic and hybrid search, embeddings, and an AI chat assistant wired to Apple Intelligence tooling. FastAPI backend, Streamlit admin, SwiftUI iOS client, PostgreSQL with pgvector.",
-    image: "/images/MACHTIA.png",
+    title: 'Machtia — soft skills for the coffee sector',
+    body: 'RAG with semantic and hybrid search, embeddings, and an AI chat assistant wired to Apple Intelligence tooling. FastAPI backend, Streamlit admin, SwiftUI iOS client, PostgreSQL with pgvector.',
+    image: '/images/MACHTIA.png',
     links: [
-      { label: "iOS app", href: "https://github.com/Bryan-Meza/Coffee-Overflow-MachtiaApp" },
-      { label: "Desktop (Streamlit)", href: "https://github.com/rogervdo/MachtiaStreamlit" },
+      { label: 'iOS app', href: 'https://github.com/Bryan-Meza/Coffee-Overflow-MachtiaApp' },
+      { label: 'Desktop (Streamlit)', href: 'https://github.com/rogervdo/MachtiaStreamlit' },
     ],
   },
   {
-    title: "OXXO training platform",
-    body: "Advisor training stack: ASP.NET Core REST APIs and Razor Pages with Unity WebGL scenarios. Modular C# services for session lifecycle, check-in/out, auth, and decision tracking for large concurrent cohorts.",
-    image: "/images/OXXO.png",
+    title: 'OXXO training platform',
+    body: 'Advisor training stack: ASP.NET Core REST APIs and Razor Pages with Unity WebGL scenarios. Modular C# services for session lifecycle, check-in/out, auth, and decision tracking for large concurrent cohorts.',
+    image: '/images/OXXO.png',
     links: [
-      { label: "Unity", href: "https://github.com/rogervdo/oxxo-unity" },
-      { label: "Web", href: "https://github.com/rogervdo/oxxo-web" },
+      { label: 'Unity', href: 'https://github.com/rogervdo/oxxo-unity' },
+      { label: 'Web', href: 'https://github.com/rogervdo/oxxo-web' },
     ],
   },
   {
-    title: "YouTube Stamina Focus",
-    body: "Chromium (Manifest V3) extension for softer daily limits on YouTube: caps, optional countdowns, comment gating, quality nudges, and thumbnail downgrades—everything stays on-device.",
-    image: "/images/STAMINA.png",
-    links: [{ label: "Repository", href: "https://github.com/rogervdo/Stamina" }],
+    title: 'YouTube Stamina Focus',
+    body: 'Chromium (Manifest V3) extension for softer daily limits on YouTube: caps, optional countdowns, comment gating, quality nudges, and thumbnail downgrades—everything stays on-device.',
+    image: '/images/STAMINA.png',
+    links: [{ label: 'Repository', href: 'https://github.com/rogervdo/Stamina' }],
   },
 ] as const;
 
@@ -85,25 +85,24 @@ const LEADERSHIP: readonly {
   placeholderLabel: string;
 }[] = [
   {
-    title: "Focus Coding Group — co-founder",
-    body:
-      'Co-founded Focus Coding Group with the objective of improving how we practice and level up as engineers. Members have landed roles at Oracle, Pinterest, C3.ai, Accenture, and Softtek.',
-    imageSrc: "/images/CODEORDIE.png",
-    placeholderLabel: "L1-focus",
+    title: 'Focus Coding Group — co-founder',
+    body: 'Co-founded Focus Coding Group with the objective of improving how we practice and level up as engineers. Members have landed roles at Oracle, Pinterest, C3.ai, Accenture, and Softtek.',
+    imageSrc: '/images/CODEORDIE.png',
+    placeholderLabel: 'L1-focus',
   },
   {
-    title: "HackMTY 2025 — Capital One track (Cappie)",
-    body: "Hackathon delivery for the Capital One fintech challenge: AI-forward banking UX with personalized coaching—FastAPI backend, MySQL, and Gemini for categorization and savings recommendations.",
-    href: "https://github.com/rogervdo/Hackmty2025-CapitalOne",
-    imageSrc: "/images/CAPITAL.jpeg",
-    placeholderLabel: "L2-hackmty",
+    title: 'HackMTY 2025 — Capital One track (Cappie)',
+    body: 'Hackathon delivery for the Capital One fintech challenge: AI-forward banking UX with personalized coaching—FastAPI backend, MySQL, and Gemini for categorization and savings recommendations.',
+    href: 'https://github.com/rogervdo/Hackmty2025-CapitalOne',
+    imageSrc: '/images/CAPITAL.jpeg',
+    placeholderLabel: 'L2-hackmty',
   },
   {
-    title: "Code or Die — LeetCode companion extension",
-    body: "Open-source Chrome extension (forked from LeetNet) for friend activity feeds, difficulty leaderboards, daily rankings, and a strikes system—with aggressive client-side caching to limit API chatter.",
-    href: "https://github.com/rogervdo/Code-or-Die",
-    imageSrc: "/images/CODEORDIE_EXT.png",
-    placeholderLabel: "L3-code-or-die",
+    title: 'Code or Die — LeetCode companion extension',
+    body: 'Open-source Chrome extension (forked from LeetNet) for friend activity feeds, difficulty leaderboards, daily rankings, and a strikes system—with aggressive client-side caching to limit API chatter.',
+    href: 'https://github.com/rogervdo/Code-or-Die',
+    imageSrc: '/images/CODEORDIE_EXT.png',
+    placeholderLabel: 'L3-code-or-die',
   },
 ];
 
@@ -115,7 +114,7 @@ function GitHubIcon({ className }: { className?: string }) {
       viewBox="0 0 24 24"
       fill="currentColor"
       aria-hidden
-      className={`h-8 w-8 shrink-0 ${className ?? ""}`}
+      className={`h-8 w-8 shrink-0 ${className ?? ''}`}
     >
       <path
         fillRule="evenodd"
@@ -133,7 +132,7 @@ function LinkedInIcon({ className }: { className?: string }) {
       viewBox="0 0 24 24"
       fill="currentColor"
       aria-hidden
-      className={`h-8 w-8 shrink-0 ${className ?? ""}`}
+      className={`h-8 w-8 shrink-0 ${className ?? ''}`}
     >
       <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z" />
     </svg>
@@ -147,7 +146,7 @@ function EmailIcon({ className }: { className?: string }) {
       viewBox="0 0 24 24"
       fill="currentColor"
       aria-hidden
-      className={`h-8 w-8 shrink-0 ${className ?? ""}`}
+      className={`h-8 w-8 shrink-0 ${className ?? ''}`}
     >
       <path d="M1.5 8.67v8.58a3 3 0 0 0 3 3h15a3 3 0 0 0 3-3V8.67l-8.928 5.493a3 3 0 0 1-3.144 0L1.5 8.67Z" />
       <path d="M22.5 6.908V6.75a3 3 0 0 0-3-3h-15a3 3 0 0 0-3 3v.158l9.714 5.978a1.5 1.5 0 0 0 1.572 0L22.5 6.908Z" />
@@ -183,7 +182,7 @@ function ArrowUpRightTiny({ className }: { className?: string }) {
       fill="none"
       xmlns="http://www.w3.org/2000/svg"
       aria-hidden
-      className={`pointer-events-none inline-block shrink-0 align-baseline text-current opacity-95 h-3 w-3 motion-reduce:transition-none ${className ?? ""}`}
+      className={`pointer-events-none inline-block shrink-0 align-baseline text-current opacity-95 h-3 w-3 motion-reduce:transition-none ${className ?? ''}`}
     >
       <path
         d="M2.67 9.31 9.38 2.61M9.37 2.625H5.37M9.37 2.625V6.63"
@@ -200,9 +199,7 @@ function useSectionSpy(sectionIds: readonly string[]) {
   const [active, setActive] = useState<string | null>(() => sectionIds[0] ?? null);
 
   useEffect(() => {
-    const nodes = sectionIds
-      .map((id) => document.getElementById(id))
-      .filter((n): n is HTMLElement => Boolean(n));
+    const nodes = sectionIds.map((id) => document.getElementById(id)).filter((n): n is HTMLElement => Boolean(n));
 
     if (nodes.length === 0) return;
 
@@ -212,7 +209,7 @@ function useSectionSpy(sectionIds: readonly string[]) {
           if (entry.isIntersecting) setActive(entry.target.id);
         });
       },
-      { root: null, rootMargin: "-32% 0px -52% 0px", threshold: 0 },
+      { root: null, rootMargin: '-32% 0px -52% 0px', threshold: 0 },
     );
 
     nodes.forEach((node) => observer.observe(node));
@@ -248,8 +245,8 @@ export default function Portfolio() {
                 Junior Software Engineer · CS @ Tec de Monterrey
               </p>
               <p className="mt-4 max-w-xs text-base leading-normal text-inkFaint">
-                Full-stack delivery with pragmatic AI integrations—FastAPI and Python backends, careful data modeling,
-                and iOS when the problem calls for it.
+                Most of my work is Python and FastAPI, with whatever front end the project needs. If it belongs on a
+                phone, I reach for Swift and SwiftUI.
               </p>
 
               <SideNav active={active} className="mt-16 hidden lg:block" />
@@ -287,19 +284,11 @@ export default function Portfolio() {
                 <li key={s.href}>
                   <Link
                     href={s.href}
-                    {...(s.href.startsWith("mailto:")
-                      ? {}
-                      : { target: "_blank", rel: "noreferrer noopener" })}
+                    {...(s.href.startsWith('mailto:') ? {} : { target: '_blank', rel: 'noreferrer noopener' })}
                     aria-label={s.label}
                     className="inline-flex items-center text-inkSoft transition-colors hover:text-accent focus-visible:text-accent"
                   >
-                    {s.kind === "github" ? (
-                      <GitHubIcon />
-                    ) : s.kind === "linkedin" ? (
-                      <LinkedInIcon />
-                    ) : (
-                      <EmailIcon />
-                    )}
+                    {s.kind === 'github' ? <GitHubIcon /> : s.kind === 'linkedin' ? <LinkedInIcon /> : <EmailIcon />}
                   </Link>
                 </li>
               ))}
@@ -313,17 +302,17 @@ export default function Portfolio() {
               <h2 className="sr-only">About</h2>
               <div className="flex flex-col gap-4 lg:gap-12">
                 <p>
-                  I&apos;m <span className="text-inkSoft">Rogelio Jesús Villarreal De Ochoa</span>, pursuing a Bachelor
-                  of Science in Computer Science and Technology at{" "}
-                  <span className="text-inkSoft">Tecnológico de Monterrey</span> (August 2023 — June 2027) with a GPA of{" "}
-                  93.1/100 (3.73/4.0). My coursework spans OOP, data structures &amp; algorithms, database systems,
-                  software construction, multi-agent systems &amp; computational graphics, and cybersecurity.
+                  I&apos;m <span className="text-inkSoft">Rogelio Jesús Villarreal De Ochoa</span>, working toward a B.S.
+                  in Computer Science and Technology at <span className="text-inkSoft">Tecnológico de Monterrey</span>{' '}
+                  (August 2023 to June 2027) with a GPA of 93.1/100 (3.73/4.0). I&apos;ve taken OOP, data structures
+                  &amp; algorithms, database systems, software construction, multi-agent systems &amp; computational
+                  graphics, and cybersecurity.
                 </p>
                 <p>
-                  Outside of class I ship product-style systems: integrations with LLM and OCR providers, realtime
-                  automation pipelines, Swift and SwiftUI when the interface needs to be native, and Postgres or
-                  MySQL backends via FastAPI. I care about reproducible workflows—issues, milestones, reviews—and about
-                  making AI assist without replacing clear requirements.
+                  When I&apos;m not in lecture I build things end to end: OCR and LLM plumbing, automations that keep
+                  running without hand-holding, FastAPI over Postgres or MySQL, and Swift when a native screen beats a
+                  web view. I lean on issues, milestones, and reviews so the boring parts stay organized, and I use AI to
+                  move faster on grunt work, not to hide vague specs.
                 </p>
               </div>
             </section>
@@ -357,7 +346,10 @@ export default function Portfolio() {
                 {JOBS.map((job) => (
                   <li key={`${job.range}-${job.company}`}>
                     <div className={LIST_ITEM_HOVER_PANEL}>
-                      <a href={job.href} className="group/link-card relative mb-px block pb-12 focus-visible:z-40 focus-visible:outline-none lg:pb-8">
+                      <a
+                        href={job.href}
+                        className="group/link-card relative mb-px block pb-12 focus-visible:z-40 focus-visible:outline-none lg:pb-8"
+                      >
                         <span aria-hidden className="absolute inset-0 rounded-lg lg:-inset-x-px" />
                         <div className="relative z-10 grid gap-y-px sm:auto-rows-min sm:grid-cols-8 sm:gap-x-8 lg:gap-x-10">
                           <header className="z-10 text-[11px] font-semibold uppercase leading-normal tracking-normal text-inkFaint sm:col-span-2 sm:w-44 sm:tracking-wide lg:tracking-wider xl:w-52">
@@ -409,7 +401,7 @@ export default function Portfolio() {
               <h2 className="mb-8 text-xs font-semibold uppercase tracking-widest text-bright">Featured projects</h2>
               <ul className="group/list space-y-10">
                 {PROJECTS.map((p) => {
-                  const primary = p.links[0]?.href ?? "#projects";
+                  const primary = p.links[0]?.href ?? '#projects';
                   return (
                     <li key={p.title}>
                       <article>
@@ -471,7 +463,9 @@ export default function Portfolio() {
             </section>
 
             <section id="leadership" className="scroll-mt-24 lg:scroll-mt-24">
-              <h2 className="mb-8 text-xs font-semibold uppercase tracking-widest text-bright">Leadership activities</h2>
+              <h2 className="mb-8 text-xs font-semibold uppercase tracking-widest text-bright">
+                Leadership activities
+              </h2>
               <ul className="group/list space-y-10">
                 {LEADERSHIP.map((item, index) => {
                   const HeadingContent = (
@@ -485,7 +479,7 @@ export default function Portfolio() {
                     <li key={item.title}>
                       <article>
                         <div className={LIST_ITEM_HOVER_PANEL}>
-                            <div className="outline-offset-8 transition-colors focus-within:z-40">
+                          <div className="outline-offset-8 transition-colors focus-within:z-40">
                             <div className="relative z-10 grid gap-4 sm:grid-cols-8 sm:items-start sm:gap-x-4 sm:gap-y-px lg:gap-x-6">
                               <div className="relative sm:col-span-2">
                                 <Image
@@ -498,7 +492,7 @@ export default function Portfolio() {
                                   }
                                   width={400}
                                   sizes="(min-width: 640px) 200px, 100vw"
-                                  loading={index === 0 ? "eager" : "lazy"}
+                                  loading={index === 0 ? 'eager' : 'lazy'}
                                 />
                               </div>
                               <div className="mt-4 sm:col-span-6 sm:mt-0 sm:flex sm:min-h-full sm:flex-col sm:justify-center">
@@ -516,7 +510,9 @@ export default function Portfolio() {
                                     HeadingContent
                                   )}
                                 </h3>
-                                <p className="mt-2 max-w-prose text-sm leading-relaxed text-inkMuted lg:mt-3">{item.body}</p>
+                                <p className="mt-2 max-w-prose text-sm leading-relaxed text-inkMuted lg:mt-3">
+                                  {item.body}
+                                </p>
                               </div>
                             </div>
                           </div>
@@ -530,11 +526,7 @@ export default function Portfolio() {
           </article>
 
           <p className="mt-8 max-w-md text-sm leading-normal text-inkFaint lg:sticky lg:top-28 lg:z-40 lg:mt-12 lg:self-start lg:leading-relaxed">
-            Adapted layout inspired by{" "}
-            <a href="https://brittanychiang.com" className="font-medium text-inkFaint hover:text-accent">
-              brittanychiang.com
-            </a>
-            . Built with Next.js · TypeScript · Tailwind CSS.
+            Built with Next.js · TypeScript · Tailwind CSS.
           </p>
         </main>
       </div>
@@ -543,3 +535,4 @@ export default function Portfolio() {
     </div>
   );
 }
+
