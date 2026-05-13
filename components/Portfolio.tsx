@@ -245,8 +245,8 @@ export default function Portfolio() {
                 Junior Software Engineer · CS @ Tec de Monterrey
               </p>
               <p className="mt-4 max-w-xs text-base leading-normal text-inkFaint">
-                Most of my work is Python and FastAPI, with whatever front end the project needs. If it belongs on a
-                phone, I reach for Swift and SwiftUI.
+                I build innovative and impactful projects, as well as integration pipelines to automate processes.
+                Experienced with Python, Node, Swift/iOS and AI Integration
               </p>
 
               <SideNav active={active} className="mt-16 hidden lg:block" />
@@ -298,21 +298,20 @@ export default function Portfolio() {
 
         <main className="lg:flex lg:w-[52%] lg:flex-col lg:py-24">
           <article className="pb-16 text-base leading-relaxed text-inkMuted lg:pb-12">
-            <section id="about" className="scroll-mt-16 lg:scroll-mt-24">
+            <section id="about" className="mb-10 scroll-mt-16 lg:mb-14 lg:scroll-mt-24">
               <h2 className="sr-only">About</h2>
               <div className="flex flex-col gap-4 lg:gap-12">
                 <p>
-                  I&apos;m <span className="text-inkSoft">Rogelio Jesús Villarreal De Ochoa</span>, working toward a B.S.
-                  in Computer Science and Technology at <span className="text-inkSoft">Tecnológico de Monterrey</span>{' '}
-                  (August 2023 to June 2027) with a GPA of 93.1/100 (3.73/4.0). I&apos;ve taken OOP, data structures
-                  &amp; algorithms, database systems, software construction, multi-agent systems &amp; computational
-                  graphics, and cybersecurity.
+                  I&apos;m <span className="text-inkSoft">Rogelio Jesús Villarreal De Ochoa</span>, working toward a
+                  B.S. in Computer Science and Technology at{' '}
+                  <span className="text-inkSoft">Tecnológico de Monterrey</span> (August 2023 to June 2027) with a GPA
+                  of 93.1/100 (3.73/4.0). I&apos;ve taken OOP, data structures &amp; algorithms, database systems,
+                  software construction, multi-agent systems &amp; computational graphics, and cybersecurity.
                 </p>
                 <p>
-                  When I&apos;m not in lecture I build things end to end: OCR and LLM plumbing, automations that keep
-                  running without hand-holding, FastAPI over Postgres or MySQL, and Swift when a native screen beats a
-                  web view. I lean on issues, milestones, and reviews so the boring parts stay organized, and I use AI to
-                  move faster on grunt work, not to hide vague specs.
+                  I spend most of my technical time in Python, Node, Swift/iOS, and AI integrations. On team projects I
+                  often take a coordinating role: aligning on goals, delegating clearly, and keeping communication
+                  explicit, so what we ship stays close to the ambitious vision we set together.
                 </p>
               </div>
             </section>
@@ -325,22 +324,6 @@ export default function Portfolio() {
               <h2 id="experience-heading" className="sr-only">
                 Experience
               </h2>
-
-              <div className="mb-12 flex justify-end">
-                <Link
-                  href="/resume.pdf"
-                  className="group/link inline-flex items-baseline gap-x-1 text-[11px] font-semibold uppercase tracking-widest text-bright transition-colors hover:text-accent focus-visible:text-accent sm:text-[12px]"
-                >
-                  <span aria-hidden className="-translate-x-px text-inkMuted">
-                    [
-                  </span>
-                  <span>Résumé</span>
-                  <ArrowUpRightTiny className="translate-y-[0.2em]" />
-                  <span aria-hidden className="translate-x-px text-inkMuted">
-                    ]
-                  </span>
-                </Link>
-              </div>
 
               <ol className="group/list space-y-3">
                 {JOBS.map((job) => (
